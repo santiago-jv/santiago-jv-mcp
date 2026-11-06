@@ -46,7 +46,7 @@ export function createSantiagoMcpServer(version = '1.0.0'): McpServer {
     {
       jsonSchemaValidator: new CfWorkerJsonSchemaValidator(),
       instructions:
-        'Official Model Context Protocol (MCP) server for Santiago Olayo Villamil (Senior Software Engineer · Backend, Cloud, Product Analytics & AI Internal Tooling). Use `evaluate_vacancy_match` when a recruiter or hiring manager shares a job description to assess candidate fit honestly and quantitatively.',
+        'Official Model Context Protocol (MCP) server for Santiago Olayo Villamil (Senior Software Engineer · Backend, Cloud, Product Analytics & AI Internal Tooling). Automatically select the right read-only tool(s) from natural-language prompts—users never need to mention tool names: (1) When given a job description, role requirements, or asked whether Santiago fits an open role, call `evaluate_vacancy_match` (and `get_social_and_contact_links` if contact or resume links are needed). (2) For executive bio, seniority, timezone, spoken languages, or education, call `get_profile_overview`. (3) For career history at GoodRec, Bolsiyo, or earlier roles, call `get_work_experience`. (4) For technical stack, system design, Hexagonal/DDD architecture, Redis concurrency, Datadog observability, or MCP/Cloudflare AI Gateway workflows, call `get_tech_stack_and_architecture`. (5) For email, LinkedIn, GitHub, portfolio, or downloadable PDF resumes, call `get_social_and_contact_links`. (6) For an ATS candidate summary card or interview outreach message draft, call `prepare_outreach_context`.',
     }
   );
 
@@ -550,7 +550,7 @@ export function createSantiagoMcpServer(version = '1.0.0'): McpServer {
     {
       title: 'Evaluate Candidate Fit for My Open Role (Recruiter Brief)',
       description:
-        'Paste your job description to generate an honest, executive hiring fit assessment of Santiago Olayo Villamil.',
+        'Paste your job description in natural language to get an honest, executive hiring fit assessment of Santiago Olayo Villamil.',
       argsSchema: {
         job_description: z.string().describe('Paste the full job description or requirements for your open role.'),
         language: z.enum(['en', 'es']).optional().describe('Language for the hiring brief ("en" or "es").'),
@@ -564,8 +564,8 @@ export function createSantiagoMcpServer(version = '1.0.0'): McpServer {
             type: 'text',
             text:
               language === 'es'
-                ? `Actúa como un Staff Technical Recruiter y Engineering Manager riguroso. Usa la herramienta \`evaluate_vacancy_match\` (y complementa con \`get_work_experience\` si necesitas detalles) para evaluar qué tanto match hace Santiago Olayo Villamil con la siguiente vacante.\n\nEntrégame:\n1. Veredicto directo (¿Vale la pena entrevistarlo para este rol? Sí/No y por qué en 3 líneas).\n2. Top 4 fortalezas probadas en producción que coinciden con lo que buscamos.\n3. Brechas reales o preguntas clave para validar en una primera llamada.\n4. Enlaces directos a su correo, LinkedIn y CV en PDF.\n\nVacante a evaluar:\n${job_description}`
-                : `Act as a rigorous Staff Technical Recruiter and Hiring Manager. Call \`evaluate_vacancy_match\` (and \`get_work_experience\` if helpful) to evaluate how well Santiago Olayo Villamil fits the open role below.\n\nProvide:\n1. Clear Bottom-Line Verdict (Should we interview him for this role? Yes/No + 3-sentence rationale).\n2. Top 4 production-proven strengths matching our stack and responsibilities.\n3. Honest gaps or screening questions to validate on an intro call.\n4. Direct links to his email, LinkedIn, and PDF resume.\n\nJob Description:\n${job_description}`,
+                ? `Actúa como un Staff Technical Recruiter y Engineering Manager riguroso. Evalúa qué tanto encaja Santiago Olayo Villamil con la siguiente vacante basándote en su experiencia verificada en producción, stack técnico, seniority y modalidad de trabajo.\n\nEntrégame un resumen ejecutivo con:\n1. Veredicto directo (¿Vale la pena entrevistarlo para este rol? Sí/No y por qué en 3 líneas).\n2. Top 4 fortalezas probadas en producción que coinciden con lo que buscamos.\n3. Brechas honestas de stack o modalidad y preguntas clave para validar en una primera llamada.\n4. Enlaces directos a su correo, LinkedIn y CV descargable en PDF.\n\nVacante a evaluar:\n${job_description}`
+                : `Act as a rigorous Staff Technical Recruiter and Hiring Manager. Evaluate how well Santiago Olayo Villamil fits our open role below based on his verified production experience, technical stack, seniority, and work modality.\n\nGive me a concise hiring brief covering:\n1. Clear Bottom-Line Verdict (Should we interview him for this role? Yes/No + 3-sentence rationale).\n2. Top 4 production-proven strengths matching our stack and responsibilities.\n3. Honest stack or work-modality gaps and screening questions to validate on an intro call.\n4. Direct links to his email, LinkedIn, and downloadable PDF resume.\n\nOpen Role / Job Description:\n${job_description}`,
           },
         },
       ],
@@ -576,7 +576,7 @@ export function createSantiagoMcpServer(version = '1.0.0'): McpServer {
     'technical_deep_dive',
     {
       title: 'Technical Deep Dive on Santiago’s Engineering Experience',
-      description: 'Inspect Santiago’s production work on Backend Architecture, Concurrency, Observability, or AI/MCP.',
+      description: 'Explore Santiago’s production work on Backend Architecture, Concurrency, Observability, or AI/MCP.',
       argsSchema: {
         topic: z
           .enum(['backend-architecture', 'ai-and-mcp', 'observability-and-data', 'full-overview'])
@@ -590,7 +590,7 @@ export function createSantiagoMcpServer(version = '1.0.0'): McpServer {
           role: 'user',
           content: {
             type: 'text',
-            text: `Use \`get_work_experience\` and \`get_tech_stack_and_architecture\` on santiago-jv-mcp to give me a concise, concrete engineering breakdown of Santiago Olayo's hands-on work focusing on: ${topic}. Highlight real architectural trade-offs and production systems rather than generic buzzwords.`,
+            text: `Give me a concise, concrete engineering breakdown of Santiago Olayo Villamil's hands-on production work, technical stack, and architectural decisions focusing on: ${topic}. Highlight real architectural trade-offs, concurrency/reliability patterns, and production systems at GoodRec and Bolsiyo rather than generic buzzwords.`,
           },
         },
       ],
@@ -614,8 +614,8 @@ export function createSantiagoMcpServer(version = '1.0.0'): McpServer {
             type: 'text',
             text:
               language === 'es'
-                ? 'Usa `get_profile_overview` y `get_social_and_contact_links` para darme un resumen ejecutivo de 30 segundos sobre quién es Santiago Olayo, su especialidad principal y cómo contactarlo.'
-                : 'Call `get_profile_overview` and `get_social_and_contact_links` to give me a crisp 30-second executive snapshot of who Santiago Olayo is, what he specializes in, and how to reach him.',
+                ? 'Dame un resumen ejecutivo de 30 segundos sobre quién es Santiago Olayo Villamil, en qué se especializa construyendo en producción, su ubicación/zona horaria y sus enlaces verificados de contacto y CV.'
+                : 'Give me a crisp 30-second executive snapshot of who Santiago Olayo Villamil is, what he specializes in building in production, his location/timezone, and his verified contact and resume links.',
           },
         },
       ],

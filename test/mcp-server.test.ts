@@ -42,7 +42,46 @@ describe('santiago-jv-mcp Cloudflare Worker', () => {
     assert.match(res.headers.get('Content-Type') || '', /text\/html/);
     const html = await res.text();
     assert.match(html, /Santiago Olayo MCP Server/);
-    assert.match(html, /evaluate_vacancy_match/);
+    assert.match(html, /https:\/\/mcp\.santiago-jv\.tech\/docs/);
+  });
+
+  it('serves full interactive MCP documentation HTML on GET /docs', async () => {
+    const res = await worker.fetch(
+      new Request('https://mcp.santiago-jv.tech/docs', {
+        headers: { Accept: 'text/html' },
+      })
+    );
+    assert.equal(res.status, 200);
+    assert.match(res.headers.get('Content-Type') || '', /text\/html/);
+    const html = await res.text();
+    assert.match(html, /Santiago Olayo MCP/);
+    assert.match(html, /Claude/);
+    assert.match(html, /Codex/);
+    assert.match(html, /Antigravity/);
+  });
+
+  it('returns natural-language prompts without hardcoded tool function calls', async () => {
+    const req = createJsonRpcRequest({
+      jsonrpc: '2.0',
+      id: 99,
+      method: 'prompts/get',
+      params: {
+        name: 'evaluate_candidate_fit',
+        arguments: {
+          job_description: 'Senior Backend Engineer with TypeScript, NestJS, and AWS.',
+        },
+      },
+    });
+
+    const res = await worker.fetch(req);
+    assert.equal(res.status, 200);
+    const data = (await res.json()) as {
+      result: { messages: Array<{ content: { text: string } }> };
+    };
+    const promptText = data.result.messages[0].content.text;
+    assert.equal(promptText.includes('evaluate_vacancy_match'), false);
+    assert.equal(promptText.includes('get_work_experience'), false);
+    assert.match(promptText, /Santiago Olayo Villamil/);
   });
 
   it('handles MCP initialize handshake over Streamable HTTP', async () => {

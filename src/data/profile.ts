@@ -97,7 +97,7 @@ export const SANTIAGO_IDENTITY = {
   links: {
     portfolio: 'https://www.santiago-jv.tech',
     mcpEndpoint: 'https://mcp.santiago-jv.tech/mcp',
-    mcpDocs: 'https://www.santiago-jv.tech/mcp',
+    mcpDocs: 'https://mcp.santiago-jv.tech/docs',
     email: 'contact@santiago-jv.tech',
     linkedin: 'https://www.linkedin.com/in/santiago-jv',
     github: 'https://github.com/santiago-jv',

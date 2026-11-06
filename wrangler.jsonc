@@ -16,7 +16,7 @@
     "SERVER_VERSION": "1.0.0",
     "PUBLIC_MCP_URL": "https://mcp.santiago-jv.tech/mcp",
     "PORTFOLIO_URL": "https://www.santiago-jv.tech",
-    "DOCS_URL": "https://www.santiago-jv.tech/mcp",
+    "DOCS_URL": "https://mcp.santiago-jv.tech/docs",
     "RATE_LIMIT_PER_MINUTE": "45"
   },
   "observability": {

@@ -8,6 +8,7 @@ import {
   withStandardHeaders,
 } from './security/guardrails.js';
 import { renderAppleGatewayHtml } from './ui/gateway-page.js';
+import { renderAppleDocsHtml } from './ui/docs-page.js';
 
 export interface Env {
   SERVER_NAME?: string;
@@ -37,7 +38,7 @@ const worker = {
     const version = env.SERVER_VERSION || '1.0.0';
     const publicMcpUrl = env.PUBLIC_MCP_URL || 'https://mcp.santiago-jv.tech/mcp';
     const portfolioUrl = env.PORTFOLIO_URL || 'https://www.santiago-jv.tech';
-    const docsUrl = env.DOCS_URL || 'https://www.santiago-jv.tech/mcp';
+    const docsUrl = env.DOCS_URL || 'https://mcp.santiago-jv.tech/docs';
     const rateLimitMax = Number.parseInt(env.RATE_LIMIT_PER_MINUTE || '45', 10) || 45;
     const edgeColo =
       (request as Request & { cf?: { colo?: string } }).cf?.colo || 'EDGE';
@@ -104,9 +105,25 @@ const worker = {
       );
     }
 
-    // 4. Redirect /docs to full Next.js Apple documentation page
-    if (method === 'GET' && url.pathname === '/docs') {
-      return Response.redirect(docsUrl, 302);
+    // 4. Full Apple Cupertino MCP Documentation & Recruiter Guide on GET /docs
+    if (method === 'GET' && (url.pathname === '/docs' || url.pathname === '/docs/')) {
+      const docsHtml = renderAppleDocsHtml({
+        mcpEndpoint: publicMcpUrl,
+        portfolioUrl,
+        version,
+        edgeColo,
+      });
+
+      return withStandardHeaders(
+        new Response(docsHtml, {
+          status: 200,
+          headers: {
+            'Content-Type': 'text/html; charset=utf-8',
+            'Cache-Control': 'public, max-age=300',
+          },
+        }),
+        rate
+      );
     }
 
     // 5. Browser Landing Page on GET / (unless MCP client explicitly asks for SSE stream)

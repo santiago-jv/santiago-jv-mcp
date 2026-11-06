@@ -29,7 +29,8 @@ export function renderAppleGatewayHtml({
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Santiago Olayo — MCP Edge Server (mcp.santiago-jv.tech)</title>
-  <meta name="description" content="Public Model Context Protocol (MCP) server for Santiago Olayo Villamil. Connect Claude, Cursor, or ChatGPT to explore career history or evaluate job vacancy fit." />
+  <meta name="description" content="Public Model Context Protocol (MCP) server for Santiago Olayo Villamil. Connect Claude, Codex, Antigravity, Cursor, or ChatGPT to explore career history or evaluate job vacancy fit." />
+  <link rel="icon" href="https://www.santiago-jv.tech/favicon.svg" type="image/svg+xml" />
   <style>
     :root {
       --bg-white: #ffffff;
@@ -43,6 +44,15 @@ export function renderAppleGatewayHtml({
       --font-mono: 'SF Mono', ui-monospace, Menlo, Monaco, monospace;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    ::selection {
+      background: rgba(29, 29, 31, 0.14);
+      color: #1d1d1f;
+    }
+    .pro-card ::selection,
+    .pro-card::selection {
+      background: rgba(255, 255, 255, 0.24);
+      color: #ffffff;
+    }
     body {
       font-family: var(--font-sans);
       background: var(--bg-white);
@@ -52,8 +62,16 @@ export function renderAppleGatewayHtml({
       padding: 48px 20px 72px;
     }
     .shell {
-      max-width: 820px;
+      max-width: 840px;
       margin: 0 auto;
+    }
+    .top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
     }
     .status-pill {
       display: inline-flex;
@@ -66,7 +84,6 @@ export function renderAppleGatewayHtml({
       font-size: 12.5px;
       font-weight: 600;
       color: var(--text-secondary);
-      margin-bottom: 20px;
     }
     .dot {
       width: 8px;
@@ -75,17 +92,27 @@ export function renderAppleGatewayHtml({
       background: var(--green);
       box-shadow: 0 0 0 4px rgba(29, 131, 72, 0.14);
     }
+    .top-link {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text-primary);
+      text-decoration: none;
+      padding: 6px 14px;
+      border-radius: 980px;
+      background: var(--bg-stone);
+      border: 1px solid var(--border);
+    }
     h1 {
-      font-size: clamp(2rem, 5vw, 3.1rem);
-      letter-spacing: -0.038em;
-      line-height: 1.08;
+      font-size: clamp(2.1rem, 5vw, 3.2rem);
+      letter-spacing: -0.04em;
+      line-height: 1.06;
       font-weight: 700;
       margin-bottom: 14px;
     }
     .lead {
       font-size: 18px;
       color: var(--text-secondary);
-      max-width: 650px;
+      max-width: 680px;
       margin-bottom: 32px;
       letter-spacing: -0.014em;
     }
@@ -115,7 +142,7 @@ export function renderAppleGatewayHtml({
       border: 1px solid rgba(255, 255, 255, 0.14);
       border-radius: 16px;
       padding: 14px 18px;
-      margin-bottom: 22px;
+      margin-bottom: 18px;
       flex-wrap: wrap;
     }
     .endpoint-url {
@@ -137,6 +164,21 @@ export function renderAppleGatewayHtml({
       transition: transform 0.18s ease, opacity 0.18s ease;
     }
     .copy-btn:hover { opacity: 0.92; transform: scale(1.02); }
+    .prompt-hint {
+      background: rgba(255, 255, 255, 0.045);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin-bottom: 22px;
+      font-family: var(--font-mono);
+      font-size: 12.8px;
+      color: #d1d1d6;
+      line-height: 1.55;
+    }
+    .prompt-hint strong {
+      color: #7ee29a;
+      font-weight: 600;
+    }
     .cta-row {
       display: flex;
       gap: 12px;
@@ -176,7 +218,12 @@ export function renderAppleGatewayHtml({
     .bento h2 {
       font-size: 20px;
       letter-spacing: -0.024em;
-      margin-bottom: 16px;
+      margin-bottom: 6px;
+    }
+    .bento-sub {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 18px;
     }
     .tool-list {
       list-style: none;
@@ -209,19 +256,28 @@ export function renderAppleGatewayHtml({
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 12px;
+    }
+    .footer-meta a {
+      color: var(--text-primary);
+      font-weight: 600;
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
   <main class="shell">
-    <div class="status-pill">
-      <span class="dot"></span>
-      <span>Operational · Streamable HTTP · Cloudflare Edge (${edgeColo}) · v${version}</span>
+    <div class="top-row">
+      <div class="status-pill">
+        <span class="dot"></span>
+        <span>Operational · Streamable HTTP · Cloudflare Edge (${edgeColo}) · v${version}</span>
+      </div>
+      <a class="top-link" href="/docs">MCP Docs (/docs) ›</a>
     </div>
+
     <h1>Santiago Olayo MCP Server.</h1>
     <p class="lead">
-      Connect Claude, Cursor, ChatGPT, or VS Code directly to my career history, backend architecture blueprints, and automated recruiter job-match engine.
+      Connect Claude, Codex, Antigravity, Cursor, or ChatGPT directly to my career history, backend architecture blueprints, and automated recruiter job-match engine.
     </p>
 
     <section class="pro-card">
@@ -230,20 +286,26 @@ export function renderAppleGatewayHtml({
         <code class="endpoint-url" id="mcp-url">${mcpEndpoint}</code>
         <button class="copy-btn" type="button" onclick="navigator.clipboard.writeText('${mcpEndpoint}').then(() => { this.textContent = 'Copied'; setTimeout(() => this.textContent = 'Copy URL', 1800); })">Copy URL</button>
       </div>
+
+      <div class="prompt-hint">
+        <strong>❯ Ask in plain language:</strong> "Evaluate how well Santiago Olayo fits our Senior Backend Engineer role below, highlight production evidence, and note any honest gaps."
+      </div>
+
       <div class="cta-row">
-        <a class="btn-primary" href="${docsUrl}">Open Full Documentation &amp; Recruiter Guide ›</a>
+        <a class="btn-primary" href="${docsUrl}">Open Full Documentation &amp; Setup Guide ›</a>
         <a class="btn-secondary" href="${portfolioUrl}">Visit Portfolio (santiago-jv.tech)</a>
       </div>
     </section>
 
     <section class="bento">
-      <h2>Exposed MCP Tools (${PUBLIC_TOOL_CATALOG.length})</h2>
+      <h2>Auto-Discovered MCP Tools (${PUBLIC_TOOL_CATALOG.length})</h2>
+      <p class="bento-sub">Your AI assistant automatically selects the right tool based on natural conversation—no explicit function names needed.</p>
       <ul class="tool-list">${toolsHtml}</ul>
     </section>
 
     <footer class="footer-meta">
       <span>Protocol: Model Context Protocol (Streamable HTTP · Stateless Edge)</span>
-      <span>Health JSON: <a href="/health">/health</a></span>
+      <span><a href="/docs">Documentation (/docs)</a> · <a href="/health">Health (/health)</a> · <a href="${portfolioUrl}">Portfolio</a></span>
     </footer>
   </main>
 </body>

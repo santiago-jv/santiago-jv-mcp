@@ -3,7 +3,8 @@
 Public, stateless **Model Context Protocol (MCP)** server for **Santiago Olayo Villamil**, running at the edge on **Cloudflare Workers** over **Streamable HTTP**.
 
 - **Live MCP Endpoint:** `https://mcp.santiago-jv.tech/mcp`
-- **Documentation & Recruiter Guide:** `https://www.santiago-jv.tech/mcp`
+- **Documentation & Recruiter Guide:** `https://mcp.santiago-jv.tech/docs`
+- **Gateway Landing:** `https://mcp.santiago-jv.tech/`
 - **Health Check:** `https://mcp.santiago-jv.tech/health`
 
 ## Exposed Capabilities
