@@ -1848,6 +1848,7 @@ export function renderAppleDocsHtml({
         { label: 'Cloudflare Workers & Edge', aliases: ['cloudflare', 'cloudflare workers', 'workers', 'edge'] },
         { label: 'Datadog Observability', aliases: ['datadog', 'apm', 'observability', 'observabilidad', 'monitoreo'] },
         { label: 'CleverTap & Metabase Analytics', aliases: ['clevertap', 'metabase', 'analytics', 'analítica', 'kpis'] },
+        { label: 'Stripe, Twilio, SendGrid & KYC APIs', aliases: ['stripe', 'twilio', 'sendgrid', 'intercom', 'appsflyer', 'tusdatos', 'refacil', 'kyc', 'webhooks'] },
         { label: 'Docker & GitHub Actions CI/CD', aliases: ['docker', 'github actions', 'ci/cd', 'cicd'] },
         { label: 'End-to-End Product Ownership', aliases: ['product owner', 'stakeholders', 'scrum', 'agile', 'tech lead'] }
       ];
