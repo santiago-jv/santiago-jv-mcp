@@ -1,9 +1,9 @@
 import {
-  Language,
+  type Language,
   NON_PRIMARY_TECH_SIGNALS,
   SANTIAGO_IDENTITY,
   SKILL_MATRIX,
-  SkillEntry,
+  type SkillEntry,
 } from '../data/profile.js';
 
 export interface VacancyEvaluationInput {

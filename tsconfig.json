@@ -1,17 +1,9 @@
 {
+  "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
-    "target": "ES2022",
-    "module": "ES2022",
-    "moduleResolution": "Bundler",
-    "lib": ["ES2022"],
     "types": ["@cloudflare/workers-types", "node"],
-    "strict": true,
-    "noEmit": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true
+    "skipLibCheck": true
   },
-  "include": ["src/**/*.ts", "test/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [".astro/types.d.ts", "src/**/*", "test/**/*"],
+  "exclude": ["dist", "node_modules"]
 }

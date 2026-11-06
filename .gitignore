@@ -1,4 +1,5 @@
-# Dependencies
+# Astro
+/.astro
 /node_modules
 
 # Cloudflare Wrangler

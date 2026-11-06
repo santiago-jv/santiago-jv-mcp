@@ -33,9 +33,12 @@ jobs:
       - name: Run MCP protocol & recruiter match tests
         run: npm test
 
+      - name: Build Astro site and Cloudflare Worker bundle
+        run: npm run build
+
       - name: Dry-run Cloudflare Worker bundle on Pull Requests
         if: github.event_name == 'pull_request'
-        run: npx wrangler deploy --dry-run --outdir dist
+        run: npx wrangler deploy --dry-run
 
       - name: Deploy to Cloudflare Workers (mcp.santiago-jv.tech)
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
