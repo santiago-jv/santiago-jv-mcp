@@ -1,0 +1,45 @@
+name: Deploy MCP Server to Cloudflare Workers
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  verify-and-deploy:
+    name: Verify & Deploy santiago-jv-mcp
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck TypeScript
+        run: npm run typecheck
+
+      - name: Run MCP protocol & recruiter match tests
+        run: npm test
+
+      - name: Dry-run Cloudflare Worker bundle on Pull Requests
+        if: github.event_name == 'pull_request'
+        run: npx wrangler deploy --dry-run --outdir dist
+
+      - name: Deploy to Cloudflare Workers (mcp.santiago-jv.tech)
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

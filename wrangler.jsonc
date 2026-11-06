@@ -1,0 +1,25 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "santiago-jv-mcp",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-03-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "routes": [
+    {
+      "pattern": "mcp.santiago-jv.tech",
+      "custom_domain": true
+    }
+  ],
+  "vars": {
+    "SERVER_NAME": "santiago-jv-mcp",
+    "SERVER_VERSION": "1.0.0",
+    "PUBLIC_MCP_URL": "https://mcp.santiago-jv.tech/mcp",
+    "PORTFOLIO_URL": "https://www.santiago-jv.tech",
+    "DOCS_URL": "https://www.santiago-jv.tech/mcp",
+    "RATE_LIMIT_PER_MINUTE": "45"
+  },
+  "observability": {
+    "enabled": true
+  }
+}
