@@ -295,7 +295,7 @@ export const SKILL_MATRIX: SkillEntry[] = [
   },
   {
     id: 'third-party-integrations',
-    name: 'Third-Party Integrations (Stripe, Refácil, Tusdatos.co, Twilio, SendGrid, Intercom & AppsFlyer)',
+    name: 'Third-Party Integrations (Stripe, Refácil, Tusdatos.co, Retool, Slack Bots, Twilio, SendGrid, Intercom, Firebase FCM & AppsFlyer)',
     category: 'backend',
     tier: 'core',
     years: 4,
@@ -306,6 +306,12 @@ export const SKILL_MATRIX: SkillEntry[] = [
       'tusdatos',
       'tusdatos.co',
       'kyc',
+      'retool',
+      'slack',
+      'slack bots',
+      'firebase',
+      'fcm',
+      'push notifications',
       'twilio',
       'sendgrid',
       'intercom',
@@ -315,8 +321,8 @@ export const SKILL_MATRIX: SkillEntry[] = [
       'webhooks',
     ],
     evidence: {
-      en: 'Production integrations across payment gateways (Stripe, Refácil), KYC compliance (Tusdatos.co), attribution (AppsFlyer), and messaging (Twilio, SendGrid, Intercom).',
-      es: 'Integraciones productivas con pasarelas de pago (Stripe, Refácil), validación KYC (Tusdatos.co), atribución móvil (AppsFlyer) y mensajería (Twilio, SendGrid, Intercom).',
+      en: 'Production integrations across payment gateways (Stripe, Refácil), KYC compliance (Tusdatos.co), internal ops & bots (Retool, Slack alerts/bots), attribution (AppsFlyer), and messaging/push (Twilio, SendGrid, Intercom, Firebase FCM).',
+      es: 'Integraciones productivas con pasarelas de pago (Stripe, Refácil), validación KYC (Tusdatos.co), operación interna y bots (Retool, alertas/bots en Slack), atribución móvil (AppsFlyer) y mensajería/push (Twilio, SendGrid, Intercom, Firebase FCM).',
     },
   },
   {
