@@ -71,8 +71,8 @@ export const SANTIAGO_IDENTITY = {
     },
   ],
   summary: {
-    en: 'Systems Engineer and Senior Software Engineer with 4+ years of experience building and scaling products for startups and international companies. Specializes in backend engineering (Node.js, NestJS, TypeScript, Java, Spring Boot), Hexagonal Architecture & DDD, cloud infrastructure (AWS, Google Cloud Functions), concurrency control with Redis locks, observability (Datadog), product analytics (CleverTap, Metabase), and applied AI internal tooling (Model Context Protocol servers, team skills/plugins, and Cloudflare AI Gateway). Known for owning features end-to-end alongside product, operations, support, and finance.',
-    es: 'Ingeniero de Sistemas y Senior Software Engineer con más de 4 años de experiencia construyendo y escalando productos para startups y empresas internacionales. Especializado en desarrollo backend (Node.js, NestJS, TypeScript, Java, Spring Boot), Arquitectura Hexagonal y DDD, infraestructura cloud (AWS, Google Cloud Functions), control de concurrencia con locks en Redis, observabilidad (Datadog), analítica de producto (CleverTap, Metabase) y tooling interno con IA (servidores MCP, plugins/skills por equipo y Cloudflare AI Gateway). Reconocido por liderar funcionalidades de punta a punta junto a producto, operaciones, soporte y finanzas.',
+    en: 'Systems Engineer and Senior Software Engineer with 4+ years of experience building and scaling products for startups and international companies. Specializes in backend engineering (Node.js, NestJS, TypeScript, Java, Spring Boot), Hexagonal Architecture & DDD, cloud infrastructure (AWS, Google Cloud Functions, Cloudflare Workers), concurrency control with Redis locks, observability (Datadog), product analytics (CleverTap, Metabase), and applied AI internal tooling (Model Context Protocol servers, team skills/plugins, and LLM workflow rules). Known for owning features end-to-end alongside product, operations, support, and finance.',
+    es: 'Ingeniero de Sistemas y Senior Software Engineer con más de 4 años de experiencia construyendo y escalando productos para startups y empresas internacionales. Especializado en desarrollo backend (Node.js, NestJS, TypeScript, Java, Spring Boot), Arquitectura Hexagonal y DDD, infraestructura cloud (AWS, Google Cloud Functions, Cloudflare Workers), control de concurrencia con locks en Redis, observabilidad (Datadog), analítica de producto (CleverTap, Metabase) y tooling interno con IA (servidores MCP, plugins/skills por equipo y reglas de prompting). Reconocido por liderar funcionalidades de punta a punta junto a producto, operaciones, soporte y finanzas.',
   },
   education: [
     {
@@ -138,7 +138,7 @@ export const WORK_EXPERIENCE: WorkExperienceEntry[] = [
       'MongoDB',
       'Redis Locks',
       'MCP',
-      'Cloudflare AI Gateway',
+      'Cloudflare Workers',
       'Datadog',
       'CleverTap',
       'Metabase',
@@ -147,14 +147,14 @@ export const WORK_EXPERIENCE: WorkExperienceEntry[] = [
       en: [
         'Own feature delivery end to end alongside product, operations, support, and finance: from stakeholder discovery and technical design to cloud deployment (AWS / Cloud Functions) and post-release monitoring.',
         'Design and maintain backend microservices (Node.js, NestJS, TypeScript) using Hexagonal Architecture and Domain-Driven Design (DDD), mobile features, internal tools, zero-downtime database migrations (PostgreSQL, MongoDB), and concurrency control with atomic Redis distributed locks.',
-        'Drive the migration of repetitive manual workflows toward AI-assisted processes: building and maintaining internal MCP (Model Context Protocol) tooling for LLM connectivity, specialized plugins & skills per internal team area, and prompting rules governance via Cloudflare AI Gateway.',
+        'Drive the migration of repetitive manual workflows toward AI-assisted processes: building and maintaining internal MCP (Model Context Protocol) tooling for LLM connectivity, specialized plugins & skills per internal team area, prompting rules, and serverless edge services on Cloudflare Workers.',
         'Guarantee production reliability with Datadog APM, distributed tracing, proactive alerting, and live incident investigation.',
         'Instrument product funnels in CleverTap and build SQL analytics in Metabase to measure business impact and guide product decisions.',
       ],
       es: [
         'Lidero el ciclo completo de funcionalidades junto a producto, operaciones, soporte y finanzas: desde descubrimiento con stakeholders y diseño técnico hasta despliegue cloud (AWS / Cloud Functions) y monitoreo post-lanzamiento.',
         'Construyo y evoluciono servicios backend (Node.js, NestJS, TypeScript) bajo Arquitectura Hexagonal y DDD, funcionalidades móviles, herramientas internas, migraciones seguras de bases de datos (PostgreSQL, MongoDB) y control de concurrencia mediante locks distribuidos atómicos en Redis.',
-        'Impulsé la migración de flujos manuales hacia procesos asistidos por IA: tooling interno con MCP (Model Context Protocol) para conectar LLMs, plugins y skills especializados por área de equipo, y reglas de prompting con Cloudflare AI Gateway.',
+        'Impulsé la migración de flujos manuales hacia procesos asistidos por IA: tooling interno con MCP (Model Context Protocol) para conectar LLMs, plugins y skills especializados por área de equipo, reglas de prompting y servicios serverless en Cloudflare Workers.',
         'Monitoreo continuo de servicios distribuidos en producción, trazabilidad APM, alertas proactivas e investigación de incidentes con Datadog.',
         'Medición de eventos de producto y métricas de negocio con CleverTap y análisis de datos en Metabase para respaldar decisiones del roadmap.',
       ],
@@ -392,15 +392,15 @@ export const SKILL_MATRIX: SkillEntry[] = [
   },
   {
     id: 'cloudflare-ai',
-    name: 'Cloudflare Workers & Cloudflare AI Gateway',
+    name: 'Cloudflare Workers & Edge AI Workflows',
     category: 'ai',
     tier: 'core',
     years: 1.5,
     aliases: [
       'cloudflare',
       'cloudflare workers',
-      'cloudflare ai gateway',
-      'ai gateway',
+      'workers',
+      'edge',
       'llm',
       'llms',
       'openai',
@@ -410,8 +410,8 @@ export const SKILL_MATRIX: SkillEntry[] = [
       'prompting',
     ],
     evidence: {
-      en: 'Centralized prompting rules, multi-LLM routing, custom team plugins/skills, and edge serverless MCPs.',
-      es: 'Reglas centralizadas de prompting, enrutamiento multi-LLM, plugins/skills por área y MCPs serverless en el edge.',
+      en: 'Stateless edge MCP servers on Cloudflare Workers, Streamable HTTP transport, custom team plugins/skills, and prompting rules.',
+      es: 'Servidores MCP serverless en Cloudflare Workers, transporte Streamable HTTP, plugins/skills por área y reglas de prompting.',
     },
   },
   {
@@ -579,13 +579,13 @@ export const ARCHITECTURE_BLUEPRINT = {
     'Concurrency safety first: atomic distributed locks in Redis and idempotent queue consumers for financial/booking critical paths.',
     'Zero-downtime schema evolution across PostgreSQL and MongoDB.',
     'Observable by default: correlated logs, Datadog APM traces, CleverTap product funnels, and Metabase SQL KPIs.',
-    'Pragmatic AI acceleration: internal MCP servers, Cloudflare AI Gateway prompting governance, and area-specific LLM skills.',
+    'Pragmatic AI acceleration: internal MCP servers, serverless edge services on Cloudflare Workers, prompting rules, and area-specific LLM skills.',
   ],
   pillars: {
-    cloudAndCompute: ['Cloudflare DNS & Edge', 'AWS API Gateway', 'AWS ECS Microservices', 'Google Cloud Functions', 'AWS SQS / SNS / EventBridge', 'BullMQ'],
+    cloudAndCompute: ['Cloudflare Workers & DNS Edge', 'AWS API Gateway', 'AWS ECS Microservices', 'Google Cloud Functions', 'AWS SQS / SNS / EventBridge', 'BullMQ'],
     dataAndState: ['PostgreSQL', 'MongoDB', 'Redis Distributed Locks', 'Zero-Downtime Migrations'],
     observabilityAndProduct: ['Datadog APM & Alerting', 'CleverTap Event Funnels', 'Metabase BI & SQL'],
-    aiAndTooling: ['Model Context Protocol (MCP)', 'Cloudflare AI Gateway', 'Cloudflare Workers', 'Custom Team Skills & Plugins'],
+    aiAndTooling: ['Model Context Protocol (MCP)', 'Cloudflare Workers', 'Streamable HTTP', 'Custom Team Skills & Plugins'],
   },
 };
 

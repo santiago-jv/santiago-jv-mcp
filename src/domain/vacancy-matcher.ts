@@ -294,13 +294,13 @@ export function evaluateVacancyMatch(input: VacancyEvaluationInput): VacancyEval
   const bonusDifferentiators =
     lang === 'es'
       ? [
-          'Experiencia real en producción construyendo tooling interno con MCP (Model Context Protocol) y gobernanza de LLMs con Cloudflare AI Gateway.',
+          'Experiencia real en producción construyendo tooling con MCP (Model Context Protocol) y servicios serverless en el edge con Cloudflare Workers.',
           'Mentalidad de Product Owner Engineer: trabaja directo con Producto, Operaciones, Soporte y Finanzas de punta a punta.',
           'Dominio de observabilidad y datos de negocio: Datadog (APM, trazas, alertas), CleverTap (eventos) y Metabase (SQL/BI).',
           'Sólida base en sistemas de alta concurrencia: Arquitectura Hexagonal, DDD, locks atómicos en Redis y migraciones sin caída.',
         ]
       : [
-          'Hands-on production experience building internal MCP (Model Context Protocol) tooling and LLM governance with Cloudflare AI Gateway.',
+          'Hands-on production experience building MCP (Model Context Protocol) tooling and stateless edge services on Cloudflare Workers.',
           'Product Owner Engineer mindset: partners directly with Product, Ops, Support, and Finance from discovery to post-release impact.',
           'Full-loop observability & product analytics: Datadog (APM, tracing, SLA alerts), CleverTap (funnels), and Metabase (SQL BI).',
           'Battle-tested concurrency & architecture: Hexagonal Architecture, DDD, atomic Redis distributed locks, and zero-downtime DB migrations.',
@@ -321,24 +321,24 @@ export function evaluateVacancyMatch(input: VacancyEvaluationInput): VacancyEval
       ? overallScore >= 70
         ? `Santiago presenta un ${overallScore}% de compatibilidad con ${roleLabel}. Coincide directamente en ${
             topMatchedNames.length > 0 ? topMatchedNames.join(', ') : 'ingeniería backend, cloud y entrega de producto end-to-end'
-          }, aportando además diferenciadores poco comunes como experiencia real con MCP, Cloudflare AI Gateway, Datadog y analítica en CleverTap/Metabase.`
+          }, aportando además diferenciadores poco comunes como experiencia real con MCP, Cloudflare Workers, Datadog y analítica en CleverTap/Metabase.`
         : `Santiago presenta un ${overallScore}% de compatibilidad con ${roleLabel}. Aunque cuenta con bases fuertes en arquitectura backend (Node.js/NestJS/TypeScript, AWS, PostgreSQL/MongoDB, Redis), existen diferencias frente al stack o modalidad principal solicitada que vale la pena revisar.`
       : overallScore >= 70
         ? `Santiago scores a ${overallScore}% match for ${roleLabel}. He aligns directly across ${
             topMatchedNames.length > 0 ? topMatchedNames.join(', ') : 'backend architecture, cloud delivery, and end-to-end product ownership'
-          }, while bringing rare force-multipliers in production MCP tooling, Cloudflare AI Gateway, Datadog APM, and CleverTap/Metabase analytics.`
+          }, while bringing rare force-multipliers in production MCP tooling, Cloudflare Workers, Datadog APM, and CleverTap/Metabase analytics.`
         : `Santiago scores a ${overallScore}% match for ${roleLabel}. While he brings strong backend engineering fundamentals (Node.js/NestJS/TypeScript, AWS, PostgreSQL/MongoDB, Redis), there are stack or modality differences relative to the primary requirements.`;
 
   const suggestedInterviewTopics =
     lang === 'es'
       ? [
           'Cómo estructuró microservicios con Arquitectura Hexagonal, DDD y locks distribuidos en Redis en GoodRec.',
-          'Cómo diseñó e implementó tooling interno con MCP y reglas de prompting en Cloudflare AI Gateway para acelerar equipos operativos.',
+          'Cómo diseñó e implementó tooling con MCP y servicios serverless en Cloudflare Workers para acelerar equipos operativos.',
           'Su enfoque para ejecutar migraciones zero-downtime en PostgreSQL/MongoDB y monitorear SLAs con Datadog.',
         ]
       : [
           'How he structured NestJS/TypeScript services with Hexagonal Architecture, DDD, and atomic Redis distributed locks at GoodRec.',
-          'How he built internal MCP servers and Cloudflare AI Gateway prompting rules to automate cross-team workflows.',
+          'How he built MCP servers and serverless edge workflows on Cloudflare Workers to automate cross-team processes.',
           'His approach to zero-downtime PostgreSQL/MongoDB migrations and production incident debugging in Datadog.',
         ];
 

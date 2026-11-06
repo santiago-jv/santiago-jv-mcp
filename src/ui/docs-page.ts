@@ -82,7 +82,7 @@ Open Role / Job Description:
 Cover:
 1. How he structures backend services (Hexagonal Architecture, DDD, TypeScript/NestJS, Java/Spring Boot).
 2. How he handles high concurrency, distributed Redis locks, async queues, and zero-downtime migrations.
-3. How he uses Datadog, CleverTap, Metabase, MCP servers, and Cloudflare AI Gateway in production.`,
+3. How he uses Datadog, CleverTap, Metabase, MCP servers, and Cloudflare Workers in production.`,
         },
         {
           id: 'intro',
@@ -104,7 +104,7 @@ Cover:
           {
             label: 'AI & Internal Tools Engineer',
             role: 'Applied AI & Platform Engineer',
-            jd: 'Seeking a Fullstack / Backend Software Engineer to build internal AI workflows, custom Model Context Protocol (MCP) servers, LLM routing via Cloudflare AI Gateway, and product analytics dashboards in Metabase & CleverTap. 4+ years experience, Remote.',
+            jd: 'Seeking a Fullstack / Backend Software Engineer to build internal AI workflows, custom Model Context Protocol (MCP) servers, serverless edge services on Cloudflare Workers, and product analytics dashboards in Metabase & CleverTap. 4+ years experience, Remote.',
           },
           {
             label: 'Different Stack (Rust / K8s SRE)',
@@ -462,7 +462,7 @@ Descripción de la vacante:
 Incluye:
 1. Cómo estructura servicios backend (Arquitectura Hexagonal, DDD, TypeScript/NestJS, Java/Spring Boot).
 2. Cómo resuelve alta concurrencia, locks distribuidos en Redis, colas asíncronas y migraciones sin caída.
-3. Cómo aplica Datadog, CleverTap, Metabase, servidores MCP y Cloudflare AI Gateway en producción.`,
+3. Cómo aplica Datadog, CleverTap, Metabase, servidores MCP y Cloudflare Workers en producción.`,
         },
         {
           id: 'intro',
@@ -484,7 +484,7 @@ Incluye:
           {
             label: 'Ingeniero IA & Internal Tools',
             role: 'Product Owner / AI Tooling Engineer',
-            jd: 'Buscamos Ingeniero de Software Fullstack/Backend para liderar automatización de procesos internos con IA, servidores Model Context Protocol (MCP), reglas en Cloudflare AI Gateway y analítica de producto con CleverTap y Metabase. 4+ años, Remoto.',
+            jd: 'Buscamos Ingeniero de Software Fullstack/Backend para liderar automatización de procesos internos con IA, servidores Model Context Protocol (MCP), servicios serverless en Cloudflare Workers y analítica de producto con CleverTap y Metabase. 4+ años, Remoto.',
           },
           {
             label: 'Otro Stack (Rust / K8s Presencial)',
@@ -1845,7 +1845,7 @@ export function renderAppleDocsHtml({
         { label: 'Redis Distributed Locks', aliases: ['redis', 'locks', 'concurrency', 'concurrencia'] },
         { label: 'AWS & Serverless', aliases: ['aws', 'ecs', 'lambda', 's3', 'sqs', 'cloud functions', 'serverless'] },
         { label: 'Model Context Protocol (MCP)', aliases: ['mcp', 'model context protocol', 'ai tooling', 'llm', 'llms'] },
-        { label: 'Cloudflare AI Gateway & Workers', aliases: ['cloudflare', 'ai gateway'] },
+        { label: 'Cloudflare Workers & Edge', aliases: ['cloudflare', 'cloudflare workers', 'workers', 'edge'] },
         { label: 'Datadog Observability', aliases: ['datadog', 'apm', 'observability', 'observabilidad', 'monitoreo'] },
         { label: 'CleverTap & Metabase Analytics', aliases: ['clevertap', 'metabase', 'analytics', 'analítica', 'kpis'] },
         { label: 'Docker & GitHub Actions CI/CD', aliases: ['docker', 'github actions', 'ci/cd', 'cicd'] },
@@ -1957,10 +1957,10 @@ export function renderAppleDocsHtml({
         const summary =
           locale === 'es'
             ? score >= 70
-              ? 'Compatibilidad estimada del ' + score + '% para ' + (role || 'esta vacante') + '. Coincidencia directa en ' + matched.length + ' áreas clave de producción (GoodRec / Bolsiyo), sumando diferenciadores en MCP, Cloudflare AI Gateway, Datadog y ownership de producto.'
+              ? 'Compatibilidad estimada del ' + score + '% para ' + (role || 'esta vacante') + '. Coincidencia directa en ' + matched.length + ' áreas clave de producción (GoodRec / Bolsiyo), sumando diferenciadores en MCP, Cloudflare Workers, Datadog y ownership de producto.'
               : 'Compatibilidad estimada del ' + score + '% para ' + (role || 'esta vacante') + '. Cuenta con bases sólidas de ingeniería backend y cloud, pero existen requisitos específicos fuera de su stack o modalidad principal.'
             : score >= 70
-              ? 'Estimated ' + score + '% match for ' + (role || 'this role') + '. Direct overlap across ' + matched.length + ' production areas (GoodRec / Bolsiyo), amplified by hands-on MCP tooling, Cloudflare AI Gateway, Datadog APM, and end-to-end ownership.'
+              ? 'Estimated ' + score + '% match for ' + (role || 'this role') + '. Direct overlap across ' + matched.length + ' production areas (GoodRec / Bolsiyo), amplified by hands-on MCP tooling, Cloudflare Workers, Datadog APM, and end-to-end ownership.'
               : 'Estimated ' + score + '% match for ' + (role || 'this role') + '. Brings strong backend & cloud engineering fundamentals, though key primary requirements differ from his core stack or modality.';
 
         const copy = COPY[locale].recruiter.simulator;
