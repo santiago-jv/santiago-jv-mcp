@@ -122,7 +122,7 @@ export const DOCS_COPY: Record<'en' | 'es', DocsCopyLocale> = {
     },
     hero: {
       statusPrefix: 'Operational · Streamable HTTP',
-      title: 'Santiago Olayo MCP.',
+      title: 'Santiago Olayo MCP',
       subtitle:
         'Connect Claude, Codex, Antigravity, Cursor, or ChatGPT to explore my career history, backend architecture, and job vacancy compatibility.',
       endpointCaption: 'Public Streamable HTTP Endpoint · No Auth Required',
@@ -136,8 +136,8 @@ export const DOCS_COPY: Record<'en' | 'es', DocsCopyLocale> = {
       ],
     },
     setup: {
-      eyebrow: '01. Quick Start',
-      headline: 'Connect in 10 Seconds.',
+      eyebrow: 'Quick Start',
+      headline: 'Connect in 10 Seconds',
       description:
         'Select your AI client and copy the Streamable HTTP configuration.',
       copySnippet: 'Copy Snippet',
@@ -258,8 +258,8 @@ url = "https://mcp.santiago-jv.tech/mcp"`,
       ],
     },
     recruiter: {
-      eyebrow: '02. Vacancy Match & Prompts',
-      headline: 'Ask in Plain Language.',
+      eyebrow: 'Vacancy Match & Prompts',
+      headline: 'Ask in Plain Language',
       description:
         'Your AI assistant automatically selects the right tool. Copy a prompt or test a role in the edge simulator below.',
       promptCardTitle: 'Natural Prompts',
@@ -322,8 +322,8 @@ Job Description:
       },
     },
     reference: {
-      eyebrow: '03. Reference',
-      headline: 'Tools & Resources.',
+      eyebrow: 'Reference',
+      headline: 'Tools & Resources',
       description:
         'Read-only MCP capabilities exposed with strict Zod schemas.',
       toolsTitle: 'Tools (6)',
@@ -432,7 +432,7 @@ Job Description:
     },
     hero: {
       statusPrefix: 'Operativo · Streamable HTTP',
-      title: 'Santiago Olayo MCP.',
+      title: 'Santiago Olayo MCP',
       subtitle:
         'Conecta Claude, Codex, Antigravity, Cursor o ChatGPT para consultar mi trayectoria, arquitectura backend y compatibilidad con vacantes.',
       endpointCaption: 'Endpoint Streamable HTTP Público · Sin Autenticación',
@@ -446,8 +446,8 @@ Job Description:
       ],
     },
     setup: {
-      eyebrow: '01. Conexión Rápida',
-      headline: 'Conéctalo en 10 Segundos.',
+      eyebrow: 'Conexión Rápida',
+      headline: 'Conéctalo en 10 Segundos',
       description:
         'Selecciona tu cliente de IA y copia la configuración Streamable HTTP.',
       copySnippet: 'Copiar Configuración',
@@ -568,8 +568,8 @@ url = "https://mcp.santiago-jv.tech/mcp"`,
       ],
     },
     recruiter: {
-      eyebrow: '02. Match de Vacantes y Prompts',
-      headline: 'Pregunta en Lenguaje Natural.',
+      eyebrow: 'Match de Vacantes y Prompts',
+      headline: 'Pregunta en Lenguaje Natural',
       description:
         'Tu asistente de IA invoca la herramienta adecuada automáticamente. Copia un prompt o prueba el simulador abajo.',
       promptCardTitle: 'Prompts Sugeridos',
@@ -632,8 +632,8 @@ Vacante:
       },
     },
     reference: {
-      eyebrow: '03. Referencia',
-      headline: 'Tools y Recursos.',
+      eyebrow: 'Referencia',
+      headline: 'Tools y Recursos',
       description:
         'Capacidades MCP de solo lectura tipadas con esquemas Zod.',
       toolsTitle: 'Tools (6)',

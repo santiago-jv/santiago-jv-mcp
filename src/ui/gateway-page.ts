@@ -29,23 +29,23 @@ export function renderAppleGatewayHtml({
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Santiago Olayo · MCP Edge Server (mcp.santiago-jv.tech)</title>
+  <title>Santiago Olayo | MCP Server</title>
   <meta name="description" content="Public Model Context Protocol (MCP) server for Santiago Olayo Villamil. Connect Claude, Codex, Antigravity, Cursor, or ChatGPT to explore career history or evaluate job vacancy fit." />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1" />
   <meta name="theme-color" content="#ffffff" />
   <link rel="canonical" href="https://mcp.santiago-jv.tech/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Santiago Olayo MCP Server" />
-  <meta property="og:title" content="Santiago Olayo · MCP Edge Server (mcp.santiago-jv.tech)" />
+  <meta property="og:title" content="Santiago Olayo | MCP Server" />
   <meta property="og:description" content="Public Model Context Protocol (MCP) server for Santiago Olayo Villamil. Connect Claude, Codex, Antigravity, Cursor, or ChatGPT to explore career history or evaluate job vacancy fit." />
   <meta property="og:url" content="https://mcp.santiago-jv.tech/" />
   <meta property="og:image" content="https://www.santiago-jv.tech/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@santiagojv_tech" />
-  <meta name="twitter:title" content="Santiago Olayo · MCP Edge Server (mcp.santiago-jv.tech)" />
+  <meta name="twitter:title" content="Santiago Olayo | MCP Server" />
   <meta name="twitter:description" content="Public Model Context Protocol (MCP) server for Santiago Olayo Villamil. Connect Claude, Codex, Antigravity, Cursor, or ChatGPT to explore career history or evaluate job vacancy fit." />
   <meta name="twitter:image" content="https://www.santiago-jv.tech/og-image.png" />
-  <link rel="icon" href="https://www.santiago-jv.tech/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"WebAPI","name":"Santiago Olayo MCP Edge Server","url":"https://mcp.santiago-jv.tech/mcp","documentation":"https://mcp.santiago-jv.tech/docs","description":"Public read-only Model Context Protocol (MCP) server over Streamable HTTP for exploring Santiago Olayo Villamil's engineering profile, system architecture, and job vacancy compatibility.","provider":{"@type":"Person","name":"Santiago Olayo Villamil","url":"https://www.santiago-jv.tech"}}
   </script>
@@ -342,7 +342,10 @@ export function renderAppleGatewayHtml({
   <header class="glass-header">
     <div class="header-inner">
       <a href="${portfolioUrl}" class="brand-group">
-        <img src="https://www.santiago-jv.tech/favicon.svg" alt="" width="26" height="26" class="brand-mark" />
+        <svg width="26" height="26" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" class="brand-mark" aria-hidden="true">
+          <circle cx="32" cy="32" r="30" fill="#FFFFFF" stroke="#D2D2D7" stroke-width="2"/>
+          <path d="M32.00 44.39Q29.16 44.39 27.04 43.56Q24.92 42.72 23.71 41.15Q22.50 39.58 22.36 37.38L22.34 37.10L27.07 37.10L27.11 37.30Q27.27 38.22 27.95 38.89Q28.62 39.57 29.69 39.94Q30.77 40.32 32.13 40.32Q33.52 40.32 34.53 39.94Q35.54 39.56 36.09 38.87Q36.64 38.18 36.64 37.27L36.64 37.25Q36.64 36.04 35.69 35.35Q34.74 34.66 32.50 34.21L29.97 33.70Q27.61 33.23 26.03 32.32Q24.44 31.41 23.65 30.05Q22.85 28.70 22.85 26.90L22.85 26.88Q22.86 24.69 24.03 23.06Q25.21 21.42 27.27 20.52Q29.33 19.61 31.98 19.61Q34.75 19.61 36.77 20.47Q38.79 21.34 39.92 22.91Q41.05 24.49 41.17 26.59L41.18 26.90L36.45 26.90L36.43 26.70Q36.30 25.75 35.72 25.08Q35.13 24.41 34.18 24.05Q33.22 23.68 31.98 23.68Q30.70 23.68 29.78 24.05Q28.85 24.42 28.36 25.07Q27.86 25.72 27.86 26.58L27.86 26.60Q27.86 27.35 28.29 27.91Q28.71 28.47 29.59 28.87Q30.48 29.26 31.85 29.54L34.39 30.05Q36.90 30.55 38.51 31.43Q40.11 32.31 40.89 33.64Q41.66 34.98 41.66 36.86L41.66 36.88Q41.66 39.18 40.50 40.87Q39.35 42.56 37.19 43.48Q35.03 44.39 32.00 44.39Z" fill="#1D1D1F"/>
+        </svg>
         <span>Santiago Olayo</span>
         <span class="brand-tag">MCP</span>
       </a>
@@ -354,8 +357,8 @@ export function renderAppleGatewayHtml({
     </div>
   </header>
   <main class="shell">
-    <p class="eyebrow">Model Context Protocol · Edge Server</p>
-    <h1>Santiago Olayo MCP Server.</h1>
+    <p class="eyebrow">Model Context Protocol</p>
+    <h1>Santiago Olayo MCP Server</h1>
     <p class="lead">
       Connect Claude, Codex, Antigravity, Cursor, or ChatGPT to explore my career history, backend architecture, and job vacancy fit.
     </p>
