@@ -295,20 +295,19 @@ export const SKILL_MATRIX: SkillEntry[] = [
   },
   {
     id: 'third-party-integrations',
-    name: 'Third-Party Integrations (Stripe, Refácil, Tusdatos.co, Retool, Slack Bots, Twilio, SendGrid, Intercom, Firebase FCM & AppsFlyer)',
+    name: 'Third-Party Integrations (Stripe, Nequi, Refácil, Tusdatos.co, Retool, Intercom, Twilio, SendGrid, Firebase FCM & AppsFlyer)',
     category: 'backend',
     tier: 'core',
     years: 4,
     aliases: [
       'stripe',
+      'nequi',
       'refacil',
       'refácil',
       'tusdatos',
       'tusdatos.co',
       'kyc',
       'retool',
-      'slack',
-      'slack bots',
       'firebase',
       'fcm',
       'push notifications',
@@ -321,8 +320,8 @@ export const SKILL_MATRIX: SkillEntry[] = [
       'webhooks',
     ],
     evidence: {
-      en: 'Production integrations across payment gateways (Stripe, Refácil), KYC compliance (Tusdatos.co), internal ops & bots (Retool, Slack alerts/bots), attribution (AppsFlyer), and messaging/push (Twilio, SendGrid, Intercom, Firebase FCM).',
-      es: 'Integraciones productivas con pasarelas de pago (Stripe, Refácil), validación KYC (Tusdatos.co), operación interna y bots (Retool, alertas/bots en Slack), atribución móvil (AppsFlyer) y mensajería/push (Twilio, SendGrid, Intercom, Firebase FCM).',
+      en: 'Production integrations across payment gateways and digital wallets (Stripe, Nequi, Refácil), KYC compliance (Tusdatos.co), internal ops tooling (Retool), mobile attribution (AppsFlyer), and customer messaging/push (Twilio, SendGrid, Intercom, Firebase FCM).',
+      es: 'Integraciones productivas con pasarelas de pago y billeteras digitales (Stripe, Nequi, Refácil), validación KYC (Tusdatos.co), operación interna (Retool), atribución móvil (AppsFlyer) y mensajería/push (Twilio, SendGrid, Intercom, Firebase FCM).',
     },
   },
   {
@@ -637,13 +636,13 @@ ${SANTIAGO_IDENTITY.summary.es}
 
 ## Experiencia Laboral
 ${WORK_EXPERIENCE.map(
-  (exp) => `### ${exp.role.es} — ${exp.company} (${exp.period.es} · ${exp.modality.es})
+  (exp) => `### ${exp.role.es} · ${exp.company} (${exp.period.es} · ${exp.modality.es})
 ${exp.highlights.es.map((h) => `- ${h}`).join('\n')}
 - **Tecnologías:** ${exp.tech.join(', ')}`
 ).join('\n\n')}
 
 ## Educación
-${SANTIAGO_IDENTITY.education.map((ed) => `- **${ed.degree.es}** — ${ed.institution} (${ed.period})`).join('\n')}
+${SANTIAGO_IDENTITY.education.map((ed) => `- **${ed.degree.es}** · ${ed.institution} (${ed.period})`).join('\n')}
 `;
   }
 
@@ -661,12 +660,12 @@ ${SANTIAGO_IDENTITY.summary.en}
 
 ## Work Experience
 ${WORK_EXPERIENCE.map(
-  (exp) => `### ${exp.role.en} — ${exp.company} (${exp.period.en} · ${exp.modality.en})
+  (exp) => `### ${exp.role.en} · ${exp.company} (${exp.period.en} · ${exp.modality.en})
 ${exp.highlights.en.map((h) => `- ${h}`).join('\n')}
 - **Tech Stack:** ${exp.tech.join(', ')}`
 ).join('\n\n')}
 
 ## Education
-${SANTIAGO_IDENTITY.education.map((ed) => `- **${ed.degree.en}** — ${ed.institution} (${ed.period})`).join('\n')}
+${SANTIAGO_IDENTITY.education.map((ed) => `- **${ed.degree.en}** · ${ed.institution} (${ed.period})`).join('\n')}
 `;
 }

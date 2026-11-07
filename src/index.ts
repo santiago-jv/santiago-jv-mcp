@@ -1,23 +1,17 @@
-import { WebStandardStreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js';
-import { createSantiagoMcpServer, PUBLIC_TOOL_CATALOG } from './mcp/create-server.js';
+import { handleHealthRequest, handleMcpStreamableRequest } from './mcp/handler.js';
 import {
+  buildCorsPreflightResponse,
+  buildRateLimitResponse,
   checkEdgeRateLimit,
-  CORS_HEADERS,
-  MAX_REQUEST_BODY_BYTES,
-  SECURITY_HEADERS,
+  type EdgeEnv,
+  extractClientIp,
+  resolveEdgeConfig,
   withStandardHeaders,
 } from './security/guardrails.js';
 import { renderAppleGatewayHtml } from './ui/gateway-page.js';
 import { renderAppleDocsHtml } from './ui/docs-page.js';
 
-export interface Env {
-  SERVER_NAME?: string;
-  SERVER_VERSION?: string;
-  PUBLIC_MCP_URL?: string;
-  PORTFOLIO_URL?: string;
-  DOCS_URL?: string;
-  RATE_LIMIT_PER_MINUTE?: string;
-}
+export type Env = EdgeEnv;
 
 const worker = {
   async fetch(request: Request, env: Env = {}): Promise<Response> {
@@ -26,92 +20,29 @@ const worker = {
 
     // 1. CORS Preflight
     if (method === 'OPTIONS') {
-      return new Response(null, {
-        status: 204,
-        headers: {
-          ...CORS_HEADERS,
-          ...SECURITY_HEADERS,
-        },
-      });
+      return buildCorsPreflightResponse();
     }
 
-    const version = env.SERVER_VERSION || '1.0.0';
-    const publicMcpUrl = env.PUBLIC_MCP_URL || 'https://mcp.santiago-jv.tech/mcp';
-    const portfolioUrl = env.PORTFOLIO_URL || 'https://www.santiago-jv.tech';
-    const docsUrl = env.DOCS_URL || 'https://mcp.santiago-jv.tech/docs';
-    const rateLimitMax = Number.parseInt(env.RATE_LIMIT_PER_MINUTE || '45', 10) || 45;
-    const edgeColo =
-      (request as Request & { cf?: { colo?: string } }).cf?.colo || 'EDGE';
+    const config = resolveEdgeConfig(env, request);
 
     // 2. Per-IP Edge Rate Limit Protection
-    const clientIp =
-      request.headers.get('CF-Connecting-IP') ||
-      request.headers.get('X-Forwarded-For')?.split(',')[0]?.trim() ||
-      'local-client';
-
-    const rate = checkEdgeRateLimit(clientIp, rateLimitMax);
+    const rate = checkEdgeRateLimit(extractClientIp(request), config.rateLimitMax);
     if (!rate.allowed) {
-      return withStandardHeaders(
-        new Response(
-          JSON.stringify({
-            jsonrpc: '2.0',
-            error: {
-              code: -32000,
-              message: `Rate limit exceeded (${rate.limit} req/min). Please retry in ${rate.resetSeconds}s.`,
-            },
-            id: null,
-          }),
-          {
-            status: 429,
-            headers: {
-              'Content-Type': 'application/json; charset=utf-8',
-              'Retry-After': String(rate.resetSeconds),
-            },
-          }
-        ),
-        rate
-      );
+      return buildRateLimitResponse(rate);
     }
 
     // 3. Health & Service Discovery Endpoint
     if (method === 'GET' && (url.pathname === '/health' || url.pathname === '/status')) {
-      return withStandardHeaders(
-        new Response(
-          JSON.stringify(
-            {
-              status: 'operational',
-              server: env.SERVER_NAME || 'santiago-jv-mcp',
-              version,
-              transport: 'streamable-http',
-              auth: 'public-read-only',
-              endpoint: publicMcpUrl,
-              documentation: docsUrl,
-              portfolio: portfolioUrl,
-              edgeColo,
-              tools: PUBLIC_TOOL_CATALOG.map((t) => t.name),
-            },
-            null,
-            2
-          ),
-          {
-            status: 200,
-            headers: {
-              'Content-Type': 'application/json; charset=utf-8',
-              'Cache-Control': 'public, max-age=30',
-            },
-          }
-        ),
-        rate
-      );
+      return handleHealthRequest(request, env, rate);
     }
 
     // 4. Full Apple Cupertino MCP Documentation & Recruiter Guide on GET /docs
     if (method === 'GET' && (url.pathname === '/docs' || url.pathname === '/docs/')) {
       const docsHtml = renderAppleDocsHtml({
-        mcpEndpoint: publicMcpUrl,
-        portfolioUrl,
-        version,
-        edgeColo,
+        mcpEndpoint: config.publicMcpUrl,
+        portfolioUrl: config.portfolioUrl,
+        version: config.version,
+        edgeColo: config.edgeColo,
       });
 
       return withStandardHeaders(
@@ -134,11 +65,11 @@ const worker = {
       !acceptHeader.includes('text/event-stream')
     ) {
       const html = renderAppleGatewayHtml({
-        mcpEndpoint: publicMcpUrl,
-        docsUrl,
-        portfolioUrl,
-        version,
-        edgeColo,
+        mcpEndpoint: config.publicMcpUrl,
+        docsUrl: config.docsUrl,
+        portfolioUrl: config.portfolioUrl,
+        version: config.version,
+        edgeColo: config.edgeColo,
       });
 
       return withStandardHeaders(
@@ -157,15 +88,16 @@ const worker = {
     const isMcpRoute =
       url.pathname === '/mcp' ||
       url.pathname === '/mcp/' ||
-      (url.pathname === '/' && (method === 'POST' || method === 'DELETE' || acceptHeader.includes('text/event-stream')));
+      (url.pathname === '/' &&
+        (method === 'POST' || method === 'DELETE' || acceptHeader.includes('text/event-stream')));
 
     if (!isMcpRoute) {
       return withStandardHeaders(
         new Response(
           JSON.stringify({
             error: 'Not Found',
-            mcpEndpoint: publicMcpUrl,
-            documentation: docsUrl,
+            mcpEndpoint: config.publicMcpUrl,
+            documentation: config.docsUrl,
           }),
           {
             status: 404,
@@ -176,63 +108,7 @@ const worker = {
       );
     }
 
-    // Enforce strict body ceiling before parsing
-    const contentLengthHeader = request.headers.get('Content-Length');
-    if (contentLengthHeader) {
-      const declaredBytes = Number.parseInt(contentLengthHeader, 10);
-      if (Number.isFinite(declaredBytes) && declaredBytes > MAX_REQUEST_BODY_BYTES) {
-        return withStandardHeaders(
-          new Response(
-            JSON.stringify({
-              jsonrpc: '2.0',
-              error: {
-                code: -32600,
-                message: `Payload too large. Max allowed size is ${MAX_REQUEST_BODY_BYTES} bytes.`,
-              },
-              id: null,
-            }),
-            {
-              status: 413,
-              headers: { 'Content-Type': 'application/json; charset=utf-8' },
-            }
-          ),
-          rate
-        );
-      }
-    }
-
-    // Stateless per-request MCP server & transport (Cloudflare Workers best practice)
-    const server = createSantiagoMcpServer(version);
-    const transport = new WebStandardStreamableHTTPServerTransport({
-      sessionIdGenerator: undefined,
-      enableJsonResponse: true,
-      maxRequestBodySize: MAX_REQUEST_BODY_BYTES,
-    });
-
-    try {
-      await server.connect(transport);
-      const mcpResponse = await transport.handleRequest(request);
-      return withStandardHeaders(mcpResponse, rate);
-    } catch (error) {
-      const message = error instanceof Error ? error.message : 'Internal MCP error';
-      return withStandardHeaders(
-        new Response(
-          JSON.stringify({
-            jsonrpc: '2.0',
-            error: {
-              code: -32603,
-              message,
-            },
-            id: null,
-          }),
-          {
-            status: 500,
-            headers: { 'Content-Type': 'application/json; charset=utf-8' },
-          }
-        ),
-        rate
-      );
-    }
+    return handleMcpStreamableRequest(request, env, rate);
   },
 };
 

@@ -274,20 +274,20 @@ export function evaluateVacancyMatch(input: VacancyEvaluationInput): VacancyEval
 
   const verdictLabels: Record<VacancyEvaluationResult['verdictTier'], { en: string; es: string }> = {
     STRONG_FIT: {
-      en: 'Strong Match — Highly Recommended to Interview',
-      es: 'Alto Nivel de Match — Muy Recomendado para Entrevista',
+      en: 'Strong Match · Highly Recommended to Interview',
+      es: 'Alto Nivel de Match · Muy Recomendado para Entrevista',
     },
     GOOD_FIT: {
-      en: 'Solid Match — Good Alignment on Core Fundamentals',
-      es: 'Buen Nivel de Match — Sólida Alineación en Fundamentos Clave',
+      en: 'Solid Match · Good Alignment on Core Fundamentals',
+      es: 'Buen Nivel de Match · Sólida Alineación en Fundamentos Clave',
     },
     PARTIAL_FIT: {
-      en: 'Partial / Adjacent Match — Transferable Architecture, Some Stack Gaps',
-      es: 'Match Parcial / Adyacente — Arquitectura Transferible con Brechas de Stack',
+      en: 'Partial / Adjacent Match · Transferable Architecture, Some Stack Gaps',
+      es: 'Match Parcial / Adyacente · Arquitectura Transferible con Brechas de Stack',
     },
     LOW_OVERLAP: {
-      en: 'Low Overlap — Role Targets a Different Specialization',
-      es: 'Baja Coincidencia — La Vacante Apunta a Otra Especialidad',
+      en: 'Low Overlap · Role Targets a Different Specialization',
+      es: 'Baja Coincidencia · La Vacante Apunta a Otra Especialidad',
     },
   };
 
@@ -351,7 +351,7 @@ export function evaluateVacancyMatch(input: VacancyEvaluationInput): VacancyEval
 
   const markdownReport =
     lang === 'es'
-      ? `## Evaluación de Compatibilidad — ${SANTIAGO_IDENTITY.fullName}
+      ? `## Evaluación de Compatibilidad · ${SANTIAGO_IDENTITY.fullName}
 - **Puntaje Global:** **${overallScore}/100** (${verdictLabels[verdictTier].es})
 - **¿Recomendado para entrevista?:** ${shouldInterview ? 'Sí' : 'Revisar brechas primero'}
 - **Desglose:** Stack ${stackScore}/100 · Rol/Arquitectura ${roleAlignmentScore}/100 · Seniority ${seniorityScore}/100 · Modalidad ${modalityScore}/100
@@ -383,7 +383,7 @@ ${
 - **Email:** ${nextSteps.email}
 - **LinkedIn:** ${nextSteps.linkedin}
 - **Descargar CV (PDF):** ${nextSteps.resumePdf}`
-      : `## Candidate Fit Report — ${SANTIAGO_IDENTITY.fullName}
+      : `## Candidate Fit Report · ${SANTIAGO_IDENTITY.fullName}
 - **Overall Match Score:** **${overallScore}/100** (${verdictLabels[verdictTier].en})
 - **Recommended to Interview:** ${shouldInterview ? 'Yes' : 'Validate stack gaps first'}
 - **Dimension Breakdown:** Stack ${stackScore}/100 · Role/Architecture ${roleAlignmentScore}/100 · Seniority ${seniorityScore}/100 · Modality ${modalityScore}/100

@@ -137,7 +137,7 @@ export const DOCS_COPY: Record<'en' | 'es', DocsCopyLocale> = {
       statusPrefix: 'Operational on Cloudflare Edge',
       title: 'Santiago Olayo MCP.',
       subtitle:
-        'Official documentation for mcp.santiago-jv.tech — connect Claude, Codex, Antigravity, Cursor, or ChatGPT to explore my engineering career, audit backend architecture, or evaluate open job vacancies in plain language.',
+        'Official documentation for mcp.santiago-jv.tech. Connect Claude, Codex, Antigravity, Cursor, or ChatGPT to explore my engineering career, audit backend architecture, or evaluate open job vacancies in plain language.',
       endpointCaption: 'Streamable HTTP Endpoint · Public Read-Only · Zero Auth Required',
       copyEndpoint: 'Copy Endpoint',
       copied: 'Copied',
@@ -153,7 +153,7 @@ export const DOCS_COPY: Record<'en' | 'es', DocsCopyLocale> = {
       eyebrow: 'For Recruiters, CTOs & Hiring Teams',
       headline: 'Ask Naturally. Let Your AI Pick the Tool.',
       description:
-        'Because every capability on this MCP server is documented with rich semantic descriptions and strict Zod schemas, you never have to type function names—just ask in plain language or paste your job description.',
+        'Because every capability on this MCP server is documented with rich semantic descriptions and strict Zod schemas, you never have to type function names. Just ask in plain language or paste your job description.',
       steps: [
         {
           step: '01',
@@ -176,7 +176,7 @@ export const DOCS_COPY: Record<'en' | 'es', DocsCopyLocale> = {
       ],
       promptCardTitle: 'Ready-to-Use Natural Prompts',
       promptCardSubtitle:
-        'Zero explicit tool names required—choose an audience and paste directly into your connected AI:',
+        'No explicit tool names required. Choose an audience and paste directly into your connected AI:',
       copyPromptBtn: 'Copy Prompt',
       promptTabs: [
         {
@@ -255,10 +255,10 @@ Cover:
             'In Claude Code CLI, run the one-line command below to connect over native Streamable HTTP.',
             'In Claude.ai Web or Desktop, open Settings → Connectors → Add Custom Connector and paste https://mcp.santiago-jv.tech/mcp.',
           ],
-          snippet: `# Option A — Claude Code CLI (1 command)
+          snippet: `# Option A: Claude Code CLI (1 command)
 claude mcp add --transport http santiago-jv https://mcp.santiago-jv.tech/mcp
 
-# Option B — claude_desktop_config.json
+# Option B: claude_desktop_config.json
 {
   "mcpServers": {
     "santiago-jv": {
@@ -277,10 +277,10 @@ claude mcp add --transport http santiago-jv https://mcp.santiago-jv.tech/mcp
             'Run codex mcp add in your terminal, or add the Streamable HTTP block directly to ~/.codex/config.toml.',
             'Ask naturally: "How well does Santiago Olayo fit our Senior Backend Engineer opening? Here is the job description..."',
           ],
-          snippet: `# Option A — Codex CLI
+          snippet: `# Option A: Codex CLI
 codex mcp add santiago-jv --url https://mcp.santiago-jv.tech/mcp
 
-# Option B — ~/.codex/config.toml
+# Option B: ~/.codex/config.toml
 [mcp_servers.santiago-jv]
 url = "https://mcp.santiago-jv.tech/mcp"`,
         },
@@ -387,7 +387,7 @@ url = "https://mcp.santiago-jv.tech/mcp"`,
           name: 'evaluate_vacancy_match',
           badge: 'Recruiter Flagship',
           summary:
-            'Scores a job description (0–100) against Santiago’s stack, seniority, architecture depth, and modality—returning matched production evidence and transparent stack gaps.',
+            'Scores a job description (0–100) against Santiago’s stack, seniority, architecture depth, and modality, returning matched production evidence and transparent stack gaps.',
           params: [
             { name: 'job_description', type: 'string', required: true, description: 'Full job description text or role requirements (up to 10,000 chars).' },
             { name: 'role_title', type: 'string', required: false, description: 'Title of the open position (e.g. "Senior Backend Engineer").' },
@@ -484,12 +484,12 @@ url = "https://mcp.santiago-jv.tech/mcp"`,
         {
           tag: 'Transport',
           title: 'Stateless Streamable HTTP on Cloudflare Workers',
-          body: 'Uses WebStandardStreamableHTTPServerTransport in stateless JSON mode—avoiding brittle long-lived SSE connections, proxy timeouts, and idle compute charges.',
+          body: 'Uses WebStandardStreamableHTTPServerTransport in stateless JSON mode, avoiding brittle long-lived SSE connections, proxy timeouts, and idle compute charges.',
         },
         {
           tag: 'Cost & Abuse Safety',
           title: '$0 LLM Token Exposure + Edge Rate Limiting',
-          body: 'Vacancy scoring executes deterministically at the Cloudflare edge (<5ms) while your own connected AI synthesizes the narrative—protected by 45 req/min IP rate limits and strict 32 KB body caps.',
+          body: 'Vacancy scoring executes deterministically at the Cloudflare edge (<5ms) while your own connected AI writes the analysis, protected by 45 req/min IP rate limits and strict 32 KB body caps.',
         },
         {
           tag: 'Delivery',
@@ -517,7 +517,7 @@ url = "https://mcp.santiago-jv.tech/mcp"`,
       statusPrefix: 'Operativo en Cloudflare Edge',
       title: 'Santiago Olayo MCP.',
       subtitle:
-        'Documentación oficial de mcp.santiago-jv.tech — conecta Claude, Codex, Antigravity, Cursor o ChatGPT para explorar mi trayectoria, auditar mi arquitectura backend o evaluar vacantes abiertas en lenguaje natural.',
+        'Documentación oficial de mcp.santiago-jv.tech. Conecta Claude, Codex, Antigravity, Cursor o ChatGPT para explorar mi trayectoria, auditar mi arquitectura backend o evaluar vacantes abiertas en lenguaje natural.',
       endpointCaption: 'Endpoint Streamable HTTP · Público de Solo Lectura · Sin Autenticación',
       copyEndpoint: 'Copiar Endpoint',
       copied: 'Copiado',
@@ -556,7 +556,7 @@ url = "https://mcp.santiago-jv.tech/mcp"`,
       ],
       promptCardTitle: 'Prompts Naturales Listos para Copiar',
       promptCardSubtitle:
-        'Sin mencionar nombres internos de herramientas — elige tu enfoque y pégalo en tu IA conectada:',
+        'Sin mencionar nombres internos de herramientas. Elige tu enfoque y pégalo en tu IA conectada:',
       copyPromptBtn: 'Copiar Prompt',
       promptTabs: [
         {
@@ -635,10 +635,10 @@ Incluye:
             'En Claude Code CLI, ejecuta el comando de una línea de abajo para conectar por Streamable HTTP nativo.',
             'En Claude.ai Web o Desktop, abre Configuración → Conectores → Agregar conector personalizado y pega https://mcp.santiago-jv.tech/mcp.',
           ],
-          snippet: `# Opción A — Claude Code CLI (1 comando)
+          snippet: `# Opción A: Claude Code CLI (1 comando)
 claude mcp add --transport http santiago-jv https://mcp.santiago-jv.tech/mcp
 
-# Opción B — claude_desktop_config.json
+# Opción B: claude_desktop_config.json
 {
   "mcpServers": {
     "santiago-jv": {
@@ -657,10 +657,10 @@ claude mcp add --transport http santiago-jv https://mcp.santiago-jv.tech/mcp
             'Ejecuta codex mcp add en tu terminal, o agrega el bloque Streamable HTTP directamente en ~/.codex/config.toml.',
             'Pregunta en lenguaje natural: "¿Qué tanto encaja Santiago Olayo con nuestra vacante Senior Backend? Aquí está la descripción..."',
           ],
-          snippet: `# Opción A — Codex CLI
+          snippet: `# Opción A: Codex CLI
 codex mcp add santiago-jv --url https://mcp.santiago-jv.tech/mcp
 
-# Opción B — ~/.codex/config.toml
+# Opción B: ~/.codex/config.toml
 [mcp_servers.santiago-jv]
 url = "https://mcp.santiago-jv.tech/mcp"`,
         },

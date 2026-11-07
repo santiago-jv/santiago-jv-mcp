@@ -1,6 +1,6 @@
 import { defineMiddleware } from 'astro:middleware';
 import { handleMcpStreamableRequest } from './mcp/handler.js';
-import { CORS_HEADERS, SECURITY_HEADERS } from './security/guardrails.js';
+import { buildCorsPreflightResponse } from './security/guardrails.js';
 
 export const onRequest = defineMiddleware(async (context, next) => {
   const { request, url, locals } = context;
@@ -8,13 +8,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
   // 1. Global CORS Preflight
   if (method === 'OPTIONS') {
-    return new Response(null, {
-      status: 204,
-      headers: {
-        ...CORS_HEADERS,
-        ...SECURITY_HEADERS,
-      },
-    });
+    return buildCorsPreflightResponse();
   }
 
   // 2. Zero-friction root MCP client alias: POST / or Accept: text/event-stream on /

@@ -1,66 +1,82 @@
 import { WebStandardStreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js';
-import { createSantiagoMcpServer } from './create-server.js';
+import { createSantiagoMcpServer, PUBLIC_TOOL_CATALOG } from './create-server.js';
 import {
+  buildCorsPreflightResponse,
+  buildJsonRpcErrorResponse,
+  buildRateLimitResponse,
   checkEdgeRateLimit,
-  CORS_HEADERS,
+  type EdgeEnv,
+  extractClientIp,
   MAX_REQUEST_BODY_BYTES,
-  SECURITY_HEADERS,
+  type RateLimitDecision,
+  resolveEdgeConfig,
   withStandardHeaders,
 } from '../security/guardrails.js';
 
-export interface McpHandlerEnv {
-  SERVER_VERSION?: string;
-  RATE_LIMIT_PER_MINUTE?: string;
+export type McpHandlerEnv = EdgeEnv;
+
+export function handleHealthRequest(
+  request: Request,
+  env: EdgeEnv = {},
+  precomputedRate?: RateLimitDecision
+): Response {
+  const config = resolveEdgeConfig(env, request);
+  const rate =
+    precomputedRate ?? checkEdgeRateLimit(extractClientIp(request), config.rateLimitMax);
+
+  if (!rate.allowed) {
+    return buildRateLimitResponse(rate);
+  }
+
+  return withStandardHeaders(
+    new Response(
+      JSON.stringify(
+        {
+          status: 'operational',
+          server: config.serverName,
+          version: config.version,
+          transport: 'streamable-http',
+          auth: 'public-read-only',
+          endpoint: config.publicMcpUrl,
+          documentation: config.docsUrl,
+          portfolio: config.portfolioUrl,
+          edgeColo: config.edgeColo,
+          tools: PUBLIC_TOOL_CATALOG.map((t) => t.name),
+        },
+        null,
+        2
+      ),
+      {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8',
+          'Cache-Control': 'public, max-age=30',
+        },
+      }
+    ),
+    rate
+  );
 }
 
 export async function handleMcpStreamableRequest(
   request: Request,
-  env: McpHandlerEnv = {}
+  env: McpHandlerEnv = {},
+  precomputedRate?: RateLimitDecision
 ): Promise<Response> {
   const method = request.method.toUpperCase();
 
   // 1. CORS Preflight
   if (method === 'OPTIONS') {
-    return new Response(null, {
-      status: 204,
-      headers: {
-        ...CORS_HEADERS,
-        ...SECURITY_HEADERS,
-      },
-    });
+    return buildCorsPreflightResponse();
   }
 
-  const version = env.SERVER_VERSION || '1.0.0';
-  const rateLimitMax = Number.parseInt(env.RATE_LIMIT_PER_MINUTE || '45', 10) || 45;
+  const config = resolveEdgeConfig(env, request);
 
   // 2. Per-IP Edge Rate Limit Protection
-  const clientIp =
-    request.headers.get('CF-Connecting-IP') ||
-    request.headers.get('X-Forwarded-For')?.split(',')[0]?.trim() ||
-    'local-client';
-
-  const rate = checkEdgeRateLimit(clientIp, rateLimitMax);
+  const rate =
+    precomputedRate ?? checkEdgeRateLimit(extractClientIp(request), config.rateLimitMax);
   if (!rate.allowed) {
-    return withStandardHeaders(
-      new Response(
-        JSON.stringify({
-          jsonrpc: '2.0',
-          error: {
-            code: -32000,
-            message: `Rate limit exceeded (${rate.limit} req/min). Please retry in ${rate.resetSeconds}s.`,
-          },
-          id: null,
-        }),
-        {
-          status: 429,
-          headers: {
-            'Content-Type': 'application/json; charset=utf-8',
-            'Retry-After': String(rate.resetSeconds),
-          },
-        }
-      ),
-      rate
-    );
+    return buildRateLimitResponse(rate);
   }
 
   // 3. Enforce strict body ceiling before parsing
@@ -68,28 +84,17 @@ export async function handleMcpStreamableRequest(
   if (contentLengthHeader) {
     const declaredBytes = Number.parseInt(contentLengthHeader, 10);
     if (Number.isFinite(declaredBytes) && declaredBytes > MAX_REQUEST_BODY_BYTES) {
-      return withStandardHeaders(
-        new Response(
-          JSON.stringify({
-            jsonrpc: '2.0',
-            error: {
-              code: -32600,
-              message: `Payload too large. Max allowed size is ${MAX_REQUEST_BODY_BYTES} bytes.`,
-            },
-            id: null,
-          }),
-          {
-            status: 413,
-            headers: { 'Content-Type': 'application/json; charset=utf-8' },
-          }
-        ),
+      return buildJsonRpcErrorResponse(
+        -32600,
+        `Payload too large. Max allowed size is ${MAX_REQUEST_BODY_BYTES} bytes.`,
+        413,
         rate
       );
     }
   }
 
   // 4. Stateless per-request MCP server & transport
-  const server = createSantiagoMcpServer(version);
+  const server = createSantiagoMcpServer(config.version);
   const transport = new WebStandardStreamableHTTPServerTransport({
     sessionIdGenerator: undefined,
     enableJsonResponse: true,
@@ -102,22 +107,6 @@ export async function handleMcpStreamableRequest(
     return withStandardHeaders(mcpResponse, rate);
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Internal MCP error';
-    return withStandardHeaders(
-      new Response(
-        JSON.stringify({
-          jsonrpc: '2.0',
-          error: {
-            code: -32603,
-            message,
-          },
-          id: null,
-        }),
-        {
-          status: 500,
-          headers: { 'Content-Type': 'application/json; charset=utf-8' },
-        }
-      ),
-      rate
-    );
+    return buildJsonRpcErrorResponse(-32603, message, 500, rate);
   }
 }

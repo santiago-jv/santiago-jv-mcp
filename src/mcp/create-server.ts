@@ -46,7 +46,7 @@ export function createSantiagoMcpServer(version = '1.0.0'): McpServer {
     {
       jsonSchemaValidator: new CfWorkerJsonSchemaValidator(),
       instructions:
-        'Official Model Context Protocol (MCP) server for Santiago Olayo Villamil (Senior Software Engineer · Backend, Cloud, Product Analytics & AI Internal Tooling). Automatically select the right read-only tool(s) from natural-language prompts—users never need to mention tool names: (1) When given a job description, role requirements, or asked whether Santiago fits an open role, call `evaluate_vacancy_match` (and `get_social_and_contact_links` if contact or resume links are needed). (2) For executive bio, seniority, timezone, spoken languages, or education, call `get_profile_overview`. (3) For career history at GoodRec, Bolsiyo, or earlier roles, call `get_work_experience`. (4) For technical stack, system design, Hexagonal/DDD architecture, Redis concurrency, Datadog observability, or MCP/Cloudflare Workers workflows, call `get_tech_stack_and_architecture`. (5) For email, LinkedIn, GitHub, portfolio, or downloadable PDF resumes, call `get_social_and_contact_links`. (6) For an ATS candidate summary card or interview outreach message draft, call `prepare_outreach_context`.',
+        'Official Model Context Protocol (MCP) server for Santiago Olayo Villamil (Senior Software Engineer · Backend, Cloud, Product Analytics & AI Internal Tooling). Automatically select the right read-only tool(s) from natural-language prompts so users never need to mention tool names: (1) When given a job description, role requirements, or asked whether Santiago fits an open role, call `evaluate_vacancy_match` (and `get_social_and_contact_links` if contact or resume links are needed). (2) For executive bio, seniority, timezone, spoken languages, or education, call `get_profile_overview`. (3) For career history at GoodRec, Bolsiyo, or earlier roles, call `get_work_experience`. (4) For technical stack, system design, Hexagonal/DDD architecture, Redis concurrency, Datadog observability, or MCP/Cloudflare Workers workflows, call `get_tech_stack_and_architecture`. (5) For email, LinkedIn, GitHub, portfolio, or downloadable PDF resumes, call `get_social_and_contact_links`. (6) For an ATS candidate summary card or interview outreach message draft, call `prepare_outreach_context`.',
     }
   );
 
@@ -472,7 +472,7 @@ export function createSantiagoMcpServer(version = '1.0.0'): McpServer {
     'resume-en',
     'santiago://profile/resume-en',
     {
-      title: 'Santiago Olayo Villamil — Full Resume (English)',
+      title: 'Santiago Olayo Villamil · Full Resume (English)',
       description: 'Complete structured English CV in Markdown format.',
       mimeType: 'text/markdown',
     },
@@ -491,7 +491,7 @@ export function createSantiagoMcpServer(version = '1.0.0'): McpServer {
     'resume-es',
     'santiago://profile/resume-es',
     {
-      title: 'Santiago Olayo Villamil — Full Resume (Spanish)',
+      title: 'Santiago Olayo Villamil · Full Resume (Spanish)',
       description: 'Complete structured Spanish CV in Markdown format.',
       mimeType: 'text/markdown',
     },
