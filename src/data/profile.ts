@@ -181,12 +181,12 @@ export const WORK_EXPERIENCE: WorkExperienceEntry[] = [
       en: [
         'Built and maintained high-concurrency backend services with Node.js, TypeScript, and LoopBack 4 for a fintech/commerce mobile app used by independent merchants.',
         'Designed schemas and executed safe migrations in PostgreSQL and MongoDB, optimizing critical wallet, ledger, and payment queries.',
-        'Developed secure REST APIs, payment gateway integrations, automated tests, and peer code reviews in an Agile Scrum team.',
+        'Developed secure REST APIs, Transfiya API and Nequi API merchant payment integrations (QR code and direct-to-Nequi number payments), automated tests, and peer code reviews in an Agile Scrum team.',
       ],
       es: [
         'Desarrollé y mantuve servicios backend de alta concurrencia con Node.js, TypeScript y LoopBack 4 para una plataforma móvil financiera/comercial usada por comercios independientes.',
         'Diseñé esquemas y ejecuté migraciones en PostgreSQL y MongoDB, optimizando consultas críticas de billetera y pagos.',
-        'Construí APIs REST seguras, integraciones con pasarelas de pago, pruebas automatizadas y revisiones de código bajo Scrum.',
+        'Construí APIs REST seguras, integraciones de pagos para comercios con Transfiya API y Nequi API (cobros por QR y directo a número Nequi), pruebas automatizadas y revisiones de código bajo Scrum.',
       ],
     },
   },
@@ -295,13 +295,16 @@ export const SKILL_MATRIX: SkillEntry[] = [
   },
   {
     id: 'third-party-integrations',
-    name: 'Third-Party Integrations (Stripe, Nequi, Refácil, Tusdatos.co, Retool, Intercom, Twilio, SendGrid, Firebase FCM & AppsFlyer)',
+    name: 'Third-Party Integrations (Stripe at GoodRec; Transfiya API, Nequi API & Refácil; Tusdatos.co, Retool, Intercom, Twilio, SendGrid, Firebase FCM & AppsFlyer)',
     category: 'backend',
     tier: 'core',
     years: 4,
     aliases: [
       'stripe',
       'nequi',
+      'nequi api',
+      'transfiya',
+      'transfiya api',
       'refacil',
       'refácil',
       'tusdatos',
@@ -320,8 +323,8 @@ export const SKILL_MATRIX: SkillEntry[] = [
       'webhooks',
     ],
     evidence: {
-      en: 'Production integrations across payment gateways and digital wallets (Stripe, Nequi, Refácil), KYC compliance (Tusdatos.co), internal ops tooling (Retool), mobile attribution (AppsFlyer), and customer messaging/push (Twilio, SendGrid, Intercom, Firebase FCM).',
-      es: 'Integraciones productivas con pasarelas de pago y billeteras digitales (Stripe, Nequi, Refácil), validación KYC (Tusdatos.co), operación interna (Retool), atribución móvil (AppsFlyer) y mensajería/push (Twilio, SendGrid, Intercom, Firebase FCM).',
+      en: 'Production integrations with Stripe (exclusively at GoodRec with Redis locks & idempotency), Transfiya API & Nequi API (at Bolsiyo for merchant QR and direct-to-Nequi phone number payments), Refácil, KYC compliance (Tusdatos.co), internal ops tooling (Retool), mobile attribution (AppsFlyer), and customer messaging/push (Twilio, SendGrid, Intercom, Firebase FCM).',
+      es: 'Integraciones productivas con Stripe (exclusivamente en GoodRec con locks en Redis e idempotencia), Transfiya API y Nequi API (en Bolsiyo para cobros de comercios por QR y directo a número Nequi), Refácil, validación KYC (Tusdatos.co), operación interna (Retool), atribución móvil (AppsFlyer) y mensajería/push (Twilio, SendGrid, Intercom, Firebase FCM).',
     },
   },
   {
