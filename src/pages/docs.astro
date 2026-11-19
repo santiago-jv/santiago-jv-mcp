@@ -3,7 +3,7 @@ import { resolveEdgeConfig, type EdgeEnv } from '../security/guardrails.js';
 import { renderAppleDocsHtml } from '../ui/docs-page.js';
 
 const env = (
-  ((Astro.locals as Record<string, unknown>)?.runtime as { env?: EdgeEnv } | undefined)?.env || {}
+  ((Astro.locals as unknown as Record<string, unknown>)?.runtime as { env?: EdgeEnv } | undefined)?.env || {}
 ) as EdgeEnv;
 const config = resolveEdgeConfig(env, Astro.request);
 
