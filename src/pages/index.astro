@@ -1,11 +1,10 @@
 ---
+import { env } from 'cloudflare:workers';
 import { resolveEdgeConfig, type EdgeEnv } from '../security/guardrails.js';
 import { renderAppleGatewayHtml } from '../ui/gateway-page.js';
 
-const env = (
-  ((Astro.locals as unknown as Record<string, unknown>)?.runtime as { env?: EdgeEnv } | undefined)?.env || {}
-) as EdgeEnv;
-const config = resolveEdgeConfig(env, Astro.request);
+const edgeEnv = (env || {}) as unknown as EdgeEnv;
+const config = resolveEdgeConfig(edgeEnv, Astro.request);
 
 const html = renderAppleGatewayHtml({
   mcpEndpoint: config.publicMcpUrl,
