@@ -39,12 +39,12 @@ export function renderAppleGatewayHtml({
   <meta property="og:title" content="Santiago Olayo | MCP Server" />
   <meta property="og:description" content="Public Model Context Protocol (MCP) server for Santiago Olayo Villamil. Connect Claude, Codex, Antigravity, Cursor, or ChatGPT to explore career history or evaluate job vacancy fit." />
   <meta property="og:url" content="https://mcp.santiago-jv.tech/" />
-  <meta property="og:image" content="https://www.santiago-jv.tech/og-image.png" />
+  <meta property="og:image" content="https://www.santiago-jv.tech/images/og-image.svg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@santiagojv_tech" />
   <meta name="twitter:title" content="Santiago Olayo | MCP Server" />
   <meta name="twitter:description" content="Public Model Context Protocol (MCP) server for Santiago Olayo Villamil. Connect Claude, Codex, Antigravity, Cursor, or ChatGPT to explore career history or evaluate job vacancy fit." />
-  <meta name="twitter:image" content="https://www.santiago-jv.tech/og-image.png" />
+  <meta name="twitter:image" content="https://www.santiago-jv.tech/images/og-image.svg" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"WebAPI","name":"Santiago Olayo MCP Edge Server","url":"https://mcp.santiago-jv.tech/mcp","documentation":"https://mcp.santiago-jv.tech/docs","description":"Public read-only Model Context Protocol (MCP) server over Streamable HTTP for exploring Santiago Olayo Villamil's engineering profile, system architecture, and job vacancy compatibility.","provider":{"@type":"Person","name":"Santiago Olayo Villamil","url":"https://www.santiago-jv.tech"}}

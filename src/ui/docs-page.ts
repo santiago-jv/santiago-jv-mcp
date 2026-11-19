@@ -35,12 +35,12 @@ export function renderAppleDocsHtml({
   <meta property="og:title" content="Santiago Olayo | MCP Server Docs" />
   <meta property="og:description" content="Connect Claude, Codex, Antigravity, Cursor, or ChatGPT to explore Santiago Olayo’s career or evaluate job vacancy fit in plain language." />
   <meta property="og:url" content="https://mcp.santiago-jv.tech/docs" />
-  <meta property="og:image" content="https://www.santiago-jv.tech/og-image.png" />
+  <meta property="og:image" content="https://www.santiago-jv.tech/images/og-image.svg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@santiagojv_tech" />
   <meta name="twitter:title" content="Santiago Olayo | MCP Server Docs" />
   <meta name="twitter:description" content="Connect Claude, Codex, Antigravity, Cursor, or ChatGPT to explore Santiago Olayo’s career or evaluate job vacancy fit in plain language." />
-  <meta name="twitter:image" content="https://www.santiago-jv.tech/og-image.png" />
+  <meta name="twitter:image" content="https://www.santiago-jv.tech/images/og-image.svg" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"TechArticle","headline":"Santiago Olayo MCP Server Documentation & Recruiter Guide","description":"Interactive documentation, client setup snippets, and deterministic job vacancy simulator for mcp.santiago-jv.tech.","url":"https://mcp.santiago-jv.tech/docs","author":{"@type":"Person","name":"Santiago Olayo Villamil","url":"https://www.santiago-jv.tech"}}

@@ -63,6 +63,10 @@ describe('santiago-jv-mcp Cloudflare Worker & Hexagonal Domain Suite', () => {
       })
     );
     assert.equal(res.status, 200);
+    assert.equal(res.headers.get('X-Frame-Options'), 'DENY');
+    assert.equal(res.headers.get('X-Content-Type-Options'), 'nosniff');
+    assert.ok(res.headers.get('Strict-Transport-Security'));
+    assert.ok(res.headers.get('X-RateLimit-Limit'));
     assert.match(res.headers.get('Content-Type') || '', /text\/html/);
     const html = await res.text();
     assert.match(html, /Santiago Olayo MCP Server/);
@@ -80,6 +84,10 @@ describe('santiago-jv-mcp Cloudflare Worker & Hexagonal Domain Suite', () => {
       })
     );
     assert.equal(res.status, 200);
+    assert.equal(res.headers.get('X-Frame-Options'), 'DENY');
+    assert.equal(res.headers.get('X-Content-Type-Options'), 'nosniff');
+    assert.ok(res.headers.get('Strict-Transport-Security'));
+    assert.ok(res.headers.get('X-RateLimit-Limit'));
     assert.match(res.headers.get('Content-Type') || '', /text\/html/);
     const html = await res.text();
     assert.match(html, /Santiago Olayo MCP/);

@@ -1,11 +1,13 @@
 import type { APIRoute } from 'astro';
 import { handleHealthRequest } from '../mcp/handler.js';
+import type { EdgeEnv, RateLimitDecision } from '../security/guardrails.js';
 
 export const prerender = false;
 
 export const GET: APIRoute = async ({ request, locals }) => {
-  const env = ((locals as { runtime?: { env?: Record<string, string> } })?.runtime?.env ||
-    {}) as Record<string, string>;
+  const localsRecord = locals as Record<string, unknown>;
+  const env = ((localsRecord?.runtime as { env?: EdgeEnv } | undefined)?.env || {}) as EdgeEnv;
+  const precomputedRate = localsRecord.__edgeRate as RateLimitDecision | undefined;
 
-  return handleHealthRequest(request, env);
+  return handleHealthRequest(request, env, precomputedRate);
 };

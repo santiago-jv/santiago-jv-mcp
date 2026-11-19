@@ -1,18 +1,17 @@
 ---
+import { resolveEdgeConfig, type EdgeEnv } from '../security/guardrails.js';
 import { renderAppleDocsHtml } from '../ui/docs-page.js';
 
-const mcpEndpoint = 'https://mcp.santiago-jv.tech/mcp';
-const portfolioUrl = 'https://www.santiago-jv.tech';
-const version = '1.0.0';
-
-const cf = (Astro.request as any)?.cf;
-const edgeColo = cf?.colo || 'IAD (Edge)';
+const env = (
+  ((Astro.locals as Record<string, unknown>)?.runtime as { env?: EdgeEnv } | undefined)?.env || {}
+) as EdgeEnv;
+const config = resolveEdgeConfig(env, Astro.request);
 
 const html = renderAppleDocsHtml({
-  mcpEndpoint,
-  portfolioUrl,
-  version,
-  edgeColo,
+  mcpEndpoint: config.publicMcpUrl,
+  portfolioUrl: config.portfolioUrl,
+  version: config.version,
+  edgeColo: config.edgeColo,
 });
 ---
 

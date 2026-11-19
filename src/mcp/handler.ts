@@ -106,7 +106,7 @@ export async function handleMcpStreamableRequest(
     const mcpResponse = await transport.handleRequest(request);
     return withStandardHeaders(mcpResponse, rate);
   } catch (error) {
-    const message = error instanceof Error ? error.message : 'Internal MCP error';
-    return buildJsonRpcErrorResponse(-32603, message, 500, rate);
+    console.error('[santiago-jv-mcp] Unhandled MCP request error:', error);
+    return buildJsonRpcErrorResponse(-32603, 'Internal MCP server error', 500, rate);
   }
 }
