@@ -41,7 +41,7 @@ export function renderAppleGatewayHtml({
   <meta property="og:url" content="https://mcp.santiago-jv.tech/" />
   <meta property="og:image" content="https://www.santiago-jv.tech/images/og-image.svg" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:site" content="@santiagojv_tech" />
+  <meta name="twitter:site" content="@santiagojvtech" />
   <meta name="twitter:title" content="Santiago Olayo | MCP Server" />
   <meta name="twitter:description" content="Public Model Context Protocol (MCP) server for Santiago Olayo Villamil. Connect Claude, Codex, Antigravity, Cursor, or ChatGPT to explore career history or evaluate job vacancy fit." />
   <meta name="twitter:image" content="https://www.santiago-jv.tech/images/og-image.svg" />

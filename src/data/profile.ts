@@ -101,7 +101,7 @@ export const SANTIAGO_IDENTITY = {
     email: 'contact@santiago-jv.tech',
     linkedin: 'https://www.linkedin.com/in/santiago-jv',
     github: 'https://github.com/santiago-jv',
-    x: 'https://x.com/santiagojv_tech',
+    x: 'https://x.com/santiagojvtech',
     medium: 'https://medium.com/@santiago-jv/',
     resumeEnPdf: 'https://www.santiago-jv.tech/Santiago_Olayo_Villamil_CV_EN.pdf',
     resumeEsPdf: 'https://www.santiago-jv.tech/Santiago_Olayo_Villamil_CV_ES.pdf',

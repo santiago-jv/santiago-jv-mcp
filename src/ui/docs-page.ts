@@ -37,7 +37,7 @@ export function renderAppleDocsHtml({
   <meta property="og:url" content="https://mcp.santiago-jv.tech/docs" />
   <meta property="og:image" content="https://www.santiago-jv.tech/images/og-image.svg" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:site" content="@santiagojv_tech" />
+  <meta name="twitter:site" content="@santiagojvtech" />
   <meta name="twitter:title" content="Santiago Olayo | MCP Server Docs" />
   <meta name="twitter:description" content="Connect Claude, Codex, Antigravity, Cursor, or ChatGPT to explore Santiago Olayo’s career or evaluate job vacancy fit in plain language." />
   <meta name="twitter:image" content="https://www.santiago-jv.tech/images/og-image.svg" />
