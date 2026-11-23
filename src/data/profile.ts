@@ -623,19 +623,40 @@ export const ARCHITECTURE_BLUEPRINT = {
   },
 };
 
-export function buildMarkdownResume(lang: Language): string {
+export function buildMarkdownResume(
+  lang: Language,
+  identity: {
+    fullName: string;
+    headline: { en: string; es: string };
+    location: {
+      city: string;
+      country: string;
+      workModalities: { en: string; es: string };
+    };
+    links: {
+      portfolio: string;
+      email: string;
+      linkedin: string;
+      github: string;
+      resumeEnPdf: string;
+      resumeEsPdf: string;
+    };
+    summary: { en: string; es: string };
+    education: typeof SANTIAGO_IDENTITY.education;
+  } = SANTIAGO_IDENTITY
+): string {
   if (lang === 'es') {
-    return `# ${SANTIAGO_IDENTITY.fullName}
-**${SANTIAGO_IDENTITY.headline.es}**
-- Ubicación: ${SANTIAGO_IDENTITY.location.city}, ${SANTIAGO_IDENTITY.location.country} (${SANTIAGO_IDENTITY.location.workModalities.es})
-- Web: ${SANTIAGO_IDENTITY.links.portfolio}
-- Email: ${SANTIAGO_IDENTITY.links.email}
-- LinkedIn: ${SANTIAGO_IDENTITY.links.linkedin}
-- GitHub: ${SANTIAGO_IDENTITY.links.github}
-- CV en PDF: ${SANTIAGO_IDENTITY.links.resumeEsPdf}
+    return `# ${identity.fullName}
+**${identity.headline.es}**
+- Ubicación: ${identity.location.city}, ${identity.location.country} (${identity.location.workModalities.es})
+- Web: ${identity.links.portfolio}
+- Email: ${identity.links.email}
+- LinkedIn: ${identity.links.linkedin}
+- GitHub: ${identity.links.github}
+- CV en PDF: ${identity.links.resumeEsPdf}
 
 ## Resumen Profesional
-${SANTIAGO_IDENTITY.summary.es}
+${identity.summary.es}
 
 ## Experiencia Laboral
 ${WORK_EXPERIENCE.map(
@@ -645,21 +666,21 @@ ${exp.highlights.es.map((h) => `- ${h}`).join('\n')}
 ).join('\n\n')}
 
 ## Educación
-${SANTIAGO_IDENTITY.education.map((ed) => `- **${ed.degree.es}** · ${ed.institution} (${ed.period})`).join('\n')}
+${identity.education.map((ed) => `- **${ed.degree.es}** · ${ed.institution} (${ed.period})`).join('\n')}
 `;
   }
 
-  return `# ${SANTIAGO_IDENTITY.fullName}
-**${SANTIAGO_IDENTITY.headline.en}**
-- Location: ${SANTIAGO_IDENTITY.location.city}, ${SANTIAGO_IDENTITY.location.country} (${SANTIAGO_IDENTITY.location.workModalities.en})
-- Website: ${SANTIAGO_IDENTITY.links.portfolio}
-- Email: ${SANTIAGO_IDENTITY.links.email}
-- LinkedIn: ${SANTIAGO_IDENTITY.links.linkedin}
-- GitHub: ${SANTIAGO_IDENTITY.links.github}
-- Resume PDF: ${SANTIAGO_IDENTITY.links.resumeEnPdf}
+  return `# ${identity.fullName}
+**${identity.headline.en}**
+- Location: ${identity.location.city}, ${identity.location.country} (${identity.location.workModalities.en})
+- Website: ${identity.links.portfolio}
+- Email: ${identity.links.email}
+- LinkedIn: ${identity.links.linkedin}
+- GitHub: ${identity.links.github}
+- Resume PDF: ${identity.links.resumeEnPdf}
 
 ## Professional Summary
-${SANTIAGO_IDENTITY.summary.en}
+${identity.summary.en}
 
 ## Work Experience
 ${WORK_EXPERIENCE.map(
@@ -669,6 +690,6 @@ ${exp.highlights.en.map((h) => `- ${h}`).join('\n')}
 ).join('\n\n')}
 
 ## Education
-${SANTIAGO_IDENTITY.education.map((ed) => `- **${ed.degree.en}** · ${ed.institution} (${ed.period})`).join('\n')}
+${identity.education.map((ed) => `- **${ed.degree.en}** · ${ed.institution} (${ed.period})`).join('\n')}
 `;
 }

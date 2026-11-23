@@ -8,6 +8,7 @@ import {
   SKILL_MATRIX,
   WORK_EXPERIENCE,
 } from '../data/profile.js';
+import { getLiveIdentity } from '../data/remote-config.js';
 import { evaluateVacancyMatch } from '../domain/vacancy-matcher.js';
 
 export const PUBLIC_TOOL_CATALOG = [
@@ -71,29 +72,30 @@ export function createSantiagoMcpServer(version = '1.0.0'): McpServer {
       },
     },
     async ({ language = 'en' }) => {
+      const liveIdentity = await getLiveIdentity();
       const payload = {
-        fullName: SANTIAGO_IDENTITY.fullName,
-        handle: SANTIAGO_IDENTITY.handle,
-        headline: SANTIAGO_IDENTITY.headline[language],
-        yearsOfExperience: SANTIAGO_IDENTITY.experienceLabel,
-        summary: SANTIAGO_IDENTITY.summary[language],
+        fullName: liveIdentity.fullName,
+        handle: liveIdentity.handle,
+        headline: liveIdentity.headline[language],
+        yearsOfExperience: liveIdentity.experienceLabel,
+        summary: liveIdentity.summary[language],
         location: {
-          city: SANTIAGO_IDENTITY.location.city,
-          country: SANTIAGO_IDENTITY.location.country,
-          timezone: SANTIAGO_IDENTITY.location.timezone,
-          workModalities: SANTIAGO_IDENTITY.location.workModalities[language],
+          city: liveIdentity.location.city,
+          country: liveIdentity.location.country,
+          timezone: liveIdentity.location.timezone,
+          workModalities: liveIdentity.location.workModalities[language],
         },
-        spokenLanguages: SANTIAGO_IDENTITY.spokenLanguages.map((item) => ({
+        spokenLanguages: liveIdentity.spokenLanguages.map((item) => ({
           language: item.language,
           level: item.level[language],
         })),
-        education: SANTIAGO_IDENTITY.education.map((ed) => ({
+        education: liveIdentity.education.map((ed) => ({
           degree: ed.degree[language],
           institution: ed.institution,
           period: ed.period,
           location: ed.location,
         })),
-        links: SANTIAGO_IDENTITY.links,
+        links: liveIdentity.links,
       };
 
       return {
@@ -260,10 +262,11 @@ export function createSantiagoMcpServer(version = '1.0.0'): McpServer {
       },
     },
     async ({ include_resume_urls = true }) => {
-      const { links } = SANTIAGO_IDENTITY;
+      const liveIdentity = await getLiveIdentity();
+      const { links } = liveIdentity;
       const result = {
-        name: SANTIAGO_IDENTITY.fullName,
-        preferredContactMethod: 'Email (contact@santiago-jv.tech) or LinkedIn DM (/in/santiago-jv)',
+        name: liveIdentity.fullName,
+        preferredContactMethod: `Email (${links.email}) or LinkedIn DM (${links.linkedin})`,
         email: links.email,
         portfolio: links.portfolio,
         mcpDocumentation: links.mcpDocs,
@@ -411,6 +414,7 @@ export function createSantiagoMcpServer(version = '1.0.0'): McpServer {
       },
     },
     async ({ company_name, role_title, recruiter_name, key_reason, language = 'en' }) => {
+      const liveIdentity = await getLiveIdentity();
       const sender = recruiter_name ? `${recruiter_name} (${company_name})` : company_name;
       const reasonLineEn = key_reason
         ? `Specifically, your work around ${key_reason} stood out for what we are building.`
@@ -423,34 +427,34 @@ export function createSantiagoMcpServer(version = '1.0.0'): McpServer {
         language === 'es'
           ? {
               atsSummaryCard: {
-                candidate: SANTIAGO_IDENTITY.fullName,
+                candidate: liveIdentity.fullName,
                 targetRole: `${role_title} @ ${company_name}`,
                 currentRole: 'Product Owner Engineer / Senior Backend Engineer @ GoodRec',
                 experience: '4+ años (Node.js, NestJS, TypeScript, Spring Boot, AWS, PostgreSQL, MongoDB, Redis, Datadog, MCP)',
                 location: 'Colombia (UTC-5) · Remoto / Barranquilla / Santa Marta',
-                email: SANTIAGO_IDENTITY.links.email,
-                linkedin: SANTIAGO_IDENTITY.links.linkedin,
-                resumePdf: SANTIAGO_IDENTITY.links.resumeEsPdf,
+                email: liveIdentity.links.email,
+                linkedin: liveIdentity.links.linkedin,
+                resumePdf: liveIdentity.links.resumeEsPdf,
               },
               suggestedEmailDraft: {
-                to: SANTIAGO_IDENTITY.links.email,
+                to: liveIdentity.links.email,
                 subject: `Oportunidad: ${role_title} en ${company_name}`,
                 body: `Hola Santiago,\n\nSoy ${sender}. Estuve revisando tu portafolio y evaluando tu perfil a través de tu servidor MCP para el rol de ${role_title} en ${company_name}.\n\n${reasonLineEs}\n\n¿Tendrías 20 minutos esta semana para conversar sobre el rol y el equipo?\n\nSaludos,`,
               },
             }
           : {
               atsSummaryCard: {
-                candidate: SANTIAGO_IDENTITY.fullName,
+                candidate: liveIdentity.fullName,
                 targetRole: `${role_title} @ ${company_name}`,
                 currentRole: 'Product Owner Engineer / Senior Backend Engineer @ GoodRec',
                 experience: '4+ years (Node.js, NestJS, TypeScript, Spring Boot, AWS, PostgreSQL, MongoDB, Redis, Datadog, MCP)',
                 location: 'Colombia (UTC-5, EST overlap) · Remote',
-                email: SANTIAGO_IDENTITY.links.email,
-                linkedin: SANTIAGO_IDENTITY.links.linkedin,
-                resumePdf: SANTIAGO_IDENTITY.links.resumeEnPdf,
+                email: liveIdentity.links.email,
+                linkedin: liveIdentity.links.linkedin,
+                resumePdf: liveIdentity.links.resumeEnPdf,
               },
               suggestedEmailDraft: {
-                to: SANTIAGO_IDENTITY.links.email,
+                to: liveIdentity.links.email,
                 subject: `${role_title} opportunity at ${company_name}`,
                 body: `Hi Santiago,\n\nI'm reaching out from ${sender}. I explored your portfolio and ran our ${role_title} role through your MCP server.\n\n${reasonLineEn}\n\nWould you be open to a quick 20-minute intro chat this week?\n\nBest,`,
               },
@@ -476,15 +480,18 @@ export function createSantiagoMcpServer(version = '1.0.0'): McpServer {
       description: 'Complete structured English CV in Markdown format.',
       mimeType: 'text/markdown',
     },
-    async (uri) => ({
-      contents: [
-        {
-          uri: uri.href,
-          mimeType: 'text/markdown',
-          text: buildMarkdownResume('en'),
-        },
-      ],
-    })
+    async (uri) => {
+      const liveIdentity = await getLiveIdentity();
+      return {
+        contents: [
+          {
+            uri: uri.href,
+            mimeType: 'text/markdown',
+            text: buildMarkdownResume('en', liveIdentity),
+          },
+        ],
+      };
+    }
   );
 
   server.registerResource(
@@ -495,15 +502,18 @@ export function createSantiagoMcpServer(version = '1.0.0'): McpServer {
       description: 'Complete structured Spanish CV in Markdown format.',
       mimeType: 'text/markdown',
     },
-    async (uri) => ({
-      contents: [
-        {
-          uri: uri.href,
-          mimeType: 'text/markdown',
-          text: buildMarkdownResume('es'),
-        },
-      ],
-    })
+    async (uri) => {
+      const liveIdentity = await getLiveIdentity();
+      return {
+        contents: [
+          {
+            uri: uri.href,
+            mimeType: 'text/markdown',
+            text: buildMarkdownResume('es', liveIdentity),
+          },
+        ],
+      };
+    }
   );
 
   server.registerResource(
@@ -533,15 +543,18 @@ export function createSantiagoMcpServer(version = '1.0.0'): McpServer {
       description: 'Direct contact channels, social handles, and official resume PDF URLs.',
       mimeType: 'application/json',
     },
-    async (uri) => ({
-      contents: [
-        {
-          uri: uri.href,
-          mimeType: 'application/json',
-          text: JSON.stringify(SANTIAGO_IDENTITY.links, null, 2),
-        },
-      ],
-    })
+    async (uri) => {
+      const liveIdentity = await getLiveIdentity();
+      return {
+        contents: [
+          {
+            uri: uri.href,
+            mimeType: 'application/json',
+            text: JSON.stringify(liveIdentity.links, null, 2),
+          },
+        ],
+      };
+    }
   );
 
   // Prompts
