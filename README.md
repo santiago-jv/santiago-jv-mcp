@@ -1,12 +1,15 @@
 # santiago-jv-mcp (`mcp.santiago-jv.tech`)
 
-Public, stateless **Model Context Protocol (MCP)** server for **Santiago Olayo Villamil**, running at the edge on **Cloudflare Workers** over **Streamable HTTP** (`2025-03-26` specification) and powered by **Astro 5 SSR**.
+Public, stateless **Model Context Protocol (MCP)** server for **Santiago Olayo Villamil**, running at the edge on **Cloudflare Workers** over **Streamable HTTP** (`2025-03-26` specification) and powered by **Astro 7 SSR**.
 
 - **Live MCP Endpoint:** `https://mcp.santiago-jv.tech/mcp` (also supports `POST /` as a zero-friction root alias)
 - **Interactive Documentation & Recruiter Guide:** `https://mcp.santiago-jv.tech/docs`
 - **Gateway Landing Page:** `https://mcp.santiago-jv.tech/`
 - **Health & Discovery Endpoint:** `https://mcp.santiago-jv.tech/health` (`/status` alias)
 - **Portfolio Website:** `https://www.santiago-jv.tech`
+- **AI Console:** `https://ai.santiago-jv.tech`
+- **X (Twitter):** [@santiagojvtech](https://x.com/santiagojvtech)
+- **LinkedIn:** [linkedin.com/in/santiago-jv](https://www.linkedin.com/in/santiago-jv)
 
 ---
 
@@ -52,8 +55,8 @@ src/
 1. **`evaluate_vacancy_match`** *(Recruiter Flagship)*: Scores a job description (`0–100`) against Santiago's production stack, seniority, architecture depth, and work modality, returning matched skills with evidence, key differentiators, and transparent stack or modality gaps.
 2. **`get_profile_overview`**: Executive summary, headline, years of experience (`4+ years`), location/timezone (`America/Bogota UTC-5`), spoken languages, education, and resume PDF links (`en` / `es`).
 3. **`get_work_experience`**: Production career history across **GoodRec**, **Bolsiyo**, and **Cooltivalo · +COTAS · SLS GROUPS**, filterable by company or engineering focus (`backend`, `ai-mcp`, `observability`, `product`).
-4. **`get_tech_stack_and_architecture`**: Categorized skill matrix with years of production usage, concrete evidence, third-party integrations (Stripe, Nequi, Refácil, Tusdatos.co, Retool, Intercom, Twilio, SendGrid, Firebase FCM, AppsFlyer), and system architecture principles.
-5. **`get_social_and_contact_links`**: Verified contact channels (`contact@santiago-jv.tech`, LinkedIn, GitHub, X, Medium, portfolio URL, and downloadable EN/ES PDF resumes).
+4. **`get_tech_stack_and_architecture`**: Categorized skill matrix with years of production usage, concrete evidence, third-party integrations (Stripe at GoodRec; Transfiya API, Nequi API & Refácil at Bolsiyo; Tusdatos.co, Retool, Intercom, Twilio, SendGrid, Firebase FCM, AppsFlyer), and system architecture principles.
+5. **`get_social_and_contact_links`**: Verified contact channels (`contact@santiago-jv.tech`, LinkedIn, GitHub, X `@santiagojvtech`, Medium, portfolio URL, and downloadable EN/ES PDF resumes).
 6. **`prepare_outreach_context`**: Generates a structured ATS candidate summary card and a tailored interview invitation draft for a specific company and role.
 
 ### Context Resources (4)
