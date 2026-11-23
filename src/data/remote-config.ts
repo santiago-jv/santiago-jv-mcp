@@ -111,7 +111,10 @@ export async function getLiveIdentity(
       return cachedIdentity || (SANTIAGO_IDENTITY as unknown as LiveSantiagoIdentity);
     }
 
-    const cfg = (await response.json()) as RemotePublicSiteConfig;
+    const raw = (await response.json()) as RemotePublicSiteConfig & {
+      config?: RemotePublicSiteConfig;
+    };
+    const cfg = raw?.config ?? raw;
     if (!cfg || !cfg.social?.contactEmail || !cfg.domains?.portfolioUrl) {
       return cachedIdentity || (SANTIAGO_IDENTITY as unknown as LiveSantiagoIdentity);
     }
