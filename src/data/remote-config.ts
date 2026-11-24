@@ -98,14 +98,11 @@ export async function getLiveIdentity(
     return cachedIdentity;
   }
 
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 1500);
-
   try {
     const response = await fetch(endpoint, {
       method: 'GET',
       headers: { Accept: 'application/json' },
-      signal: controller.signal,
+      signal: AbortSignal.timeout(1500),
     });
     if (!response.ok) {
       return cachedIdentity || (SANTIAGO_IDENTITY as unknown as LiveSantiagoIdentity);
@@ -149,7 +146,5 @@ export async function getLiveIdentity(
     return merged;
   } catch {
     return cachedIdentity || (SANTIAGO_IDENTITY as unknown as LiveSantiagoIdentity);
-  } finally {
-    clearTimeout(timeout);
   }
 }
