@@ -32,6 +32,7 @@ export function renderAppleGatewayHtml({
   <title>Santiago Olayo | MCP Server</title>
   <meta name="description" content="Public Model Context Protocol (MCP) server for Santiago Olayo Villamil. Connect Claude, Codex, Antigravity, Cursor, or ChatGPT to explore career history or evaluate job vacancy fit." />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1" />
+  <meta name="color-scheme" content="light" />
   <meta name="theme-color" content="#ffffff" />
   <link rel="canonical" href="https://mcp.santiago-jv.tech/" />
   <meta property="og:type" content="website" />
@@ -73,6 +74,7 @@ export function renderAppleGatewayHtml({
       background: rgba(255, 255, 255, 0.24);
       color: #ffffff;
     }
+    html { color-scheme: light; }
     body {
       font-family: var(--font-sans);
       background: var(--bg-white);
@@ -80,6 +82,18 @@ export function renderAppleGatewayHtml({
       -webkit-font-smoothing: antialiased;
       line-height: 1.55;
       padding: 0 0 64px;
+    }
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+      box-shadow: 0 0 0 4px rgba(29, 29, 31, 0.16);
+    }
+    .pro-card a:focus-visible,
+    .pro-card button:focus-visible {
+      outline: 2px solid #ffffff;
+      outline-offset: 2px;
+      box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.25);
     }
     .glass-header {
       position: sticky;
@@ -336,6 +350,9 @@ export function renderAppleGatewayHtml({
     @media (max-width: 680px) {
       .tool-list { grid-template-columns: 1fr; }
     }
+    @media (prefers-reduced-motion: reduce) {
+      .nav-link, .nav-cta { transition: none !important; }
+    }
   </style>
 </head>
 <body>
@@ -349,7 +366,7 @@ export function renderAppleGatewayHtml({
         <span>Santiago Olayo</span>
         <span class="brand-tag">MCP</span>
       </a>
-      <nav class="header-nav">
+      <nav class="header-nav" aria-label="Primary navigation">
         <a class="nav-link" href="${docsUrl}">MCP Docs</a>
         <a class="nav-link" href="${aiChatUrl}">Live AI Chat</a>
         <a class="nav-cta" href="${portfolioUrl}">Portfolio</a>
@@ -378,7 +395,7 @@ export function renderAppleGatewayHtml({
 
       <div class="endpoint-bar">
         <code class="endpoint-url" id="mcp-url">${mcpEndpoint}</code>
-        <button class="copy-btn" type="button" onclick="navigator.clipboard.writeText('${mcpEndpoint}').then(() => { this.textContent = 'Copied'; setTimeout(() => this.textContent = 'Copy URL', 1800); })">Copy URL</button>
+        <button class="copy-btn" id="btn-copy-mcp" type="button" data-endpoint="${mcpEndpoint}">Copy URL</button>
       </div>
 
       <div class="cta-row">
@@ -397,6 +414,20 @@ export function renderAppleGatewayHtml({
       <span><a href="/docs">Docs (/docs)</a> · <a href="/health">Health (/health)</a> · <a href="${portfolioUrl}">santiago-jv.tech</a></span>
     </footer>
   </main>
+  <script>
+    (function () {
+      var btn = document.getElementById('btn-copy-mcp');
+      if (!btn) return;
+      btn.addEventListener('click', function () {
+        var url = btn.getAttribute('data-endpoint') || '';
+        if (!url || !navigator.clipboard) return;
+        navigator.clipboard.writeText(url).then(function () {
+          btn.textContent = 'Copied';
+          setTimeout(function () { btn.textContent = 'Copy URL'; }, 1800);
+        });
+      });
+    })();
+  </script>
 </body>
 </html>`;
 }

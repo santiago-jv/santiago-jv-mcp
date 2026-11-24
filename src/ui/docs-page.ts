@@ -25,6 +25,7 @@ export function renderAppleDocsHtml({
   <title>Santiago Olayo | MCP Server Docs</title>
   <meta name="description" content="Official documentation for mcp.santiago-jv.tech. Connect Claude, Codex, Antigravity, Cursor, or ChatGPT to explore Santiago Olayo’s career or evaluate job vacancy fit in plain language." />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1" />
+  <meta name="color-scheme" content="light" />
   <meta name="theme-color" content="#ffffff" />
   <link rel="canonical" href="https://mcp.santiago-jv.tech/docs" />
   <link rel="alternate" hreflang="en" href="https://mcp.santiago-jv.tech/docs" />
@@ -70,13 +71,46 @@ export function renderAppleDocsHtml({
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html { color-scheme: light; }
+    @media (prefers-reduced-motion: no-preference) {
+      html { scroll-behavior: smooth; }
+    }
     body {
       font-family: var(--font-sans);
       background: var(--bg-white);
       color: var(--text-primary);
       -webkit-font-smoothing: antialiased;
       line-height: 1.55;
+    }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+      box-shadow: 0 0 0 4px rgba(29, 29, 31, 0.16);
+    }
+    .endpoint-dock a:focus-visible,
+    .endpoint-dock button:focus-visible {
+      outline: 2px solid #ffffff;
+      outline-offset: 2px;
+      box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.25);
+    }
+    #setup, #recruiter, #reference {
+      content-visibility: auto;
+      contain-intrinsic-size: auto 620px;
+      scroll-margin-top: 64px;
     }
 
     ::selection {
@@ -849,8 +883,8 @@ export function renderAppleDocsHtml({
 
       <div class="header-actions">
         <div class="lang-switch" role="group" aria-label="Language">
-          <button type="button" class="lang-btn active" id="btn-lang-en" data-lang="en">EN</button>
-          <button type="button" class="lang-btn" id="btn-lang-es" data-lang="es">ES</button>
+          <button type="button" class="lang-btn active" id="btn-lang-en" data-lang="en" aria-pressed="true">EN</button>
+          <button type="button" class="lang-btn" id="btn-lang-es" data-lang="es" aria-pressed="false">ES</button>
         </div>
         <a href="${portfolioUrl}" class="portfolio-cta" id="nav-back">Portfolio</a>
       </div>
@@ -899,9 +933,9 @@ export function renderAppleDocsHtml({
         </div>
 
         <div class="client-setup-card">
-          <div class="client-tabs" id="client-tabs" role="tablist"></div>
+          <div class="client-tabs" id="client-tabs" role="tablist" aria-label="MCP Client Setup"></div>
 
-          <div class="client-panel">
+          <div class="client-panel" id="client-tabpanel" role="tabpanel">
             <div class="client-meta-bar">
               <div class="client-meta-left">
                 <code class="client-filename" id="client-filename"></code>
@@ -940,8 +974,8 @@ export function renderAppleDocsHtml({
               </button>
             </div>
 
-            <div class="prompt-tabs" id="prompt-tabs" role="tablist"></div>
-            <pre class="prompt-pre"><code id="prompt-code"></code></pre>
+            <div class="prompt-tabs" id="prompt-tabs" role="tablist" aria-label="Recruiter Prompt Templates"></div>
+            <pre class="prompt-pre" id="prompt-tabpanel" role="tabpanel"><code id="prompt-code"></code></pre>
           </article>
 
           <article class="simulator-card">
@@ -956,11 +990,13 @@ export function renderAppleDocsHtml({
             </div>
 
             <div class="sim-inputs">
-              <input type="text" class="sim-input" id="sim-role" />
+              <label for="sim-role" class="sr-only">Target Role Title</label>
+              <input type="text" class="sim-input" id="sim-role" autocomplete="off" />
+              <label for="sim-jd" class="sr-only">Job Description or Required Skills</label>
               <textarea rows="3" class="sim-textarea" id="sim-jd"></textarea>
             </div>
 
-            <div class="sim-result-box">
+            <div class="sim-result-box" aria-live="polite" aria-atomic="false">
               <div class="sim-score-row">
                 <div>
                   <span class="sim-score-caption" id="sim-score-label"></span>
@@ -1200,14 +1236,20 @@ export function renderAppleDocsHtml({
         }
       }
 
-      function renderPromptArea() {
+      function renderPromptArea(focusSelected) {
         const rec = COPY[locale].recruiter;
         const tabsEl = document.getElementById('prompt-tabs');
         if (tabsEl) {
           tabsEl.innerHTML = rec.promptTabs
             .map(
               (t) =>
-                '<button type="button" role="tab" class="prompt-tab-btn ' +
+                '<button type="button" role="tab" id="prompt-tab-' +
+                escapeHtml(t.id) +
+                '" aria-selected="' +
+                (t.id === activePromptTab ? 'true' : 'false') +
+                '" aria-controls="prompt-tabpanel" tabindex="' +
+                (t.id === activePromptTab ? '0' : '-1') +
+                '" class="prompt-tab-btn ' +
                 (t.id === activePromptTab ? 'active' : '') +
                 '" data-prompt-id="' +
                 t.id +
@@ -1216,21 +1258,33 @@ export function renderAppleDocsHtml({
                 '</button>'
             )
             .join('');
+          if (focusSelected) {
+            const activeBtn = tabsEl.querySelector('[aria-selected="true"]');
+            if (activeBtn) activeBtn.focus();
+          }
         }
 
+        const pPanel = document.getElementById('prompt-tabpanel');
+        if (pPanel) pPanel.setAttribute('aria-labelledby', 'prompt-tab-' + activePromptTab);
         const activeObj = rec.promptTabs.find((t) => t.id === activePromptTab) || rec.promptTabs[0];
         const pCode = document.getElementById('prompt-code');
         if (pCode) pCode.textContent = activeObj.prompt;
       }
 
-      function renderClientArea() {
+      function renderClientArea(focusSelected) {
         const setup = COPY[locale].setup;
         const tabsEl = document.getElementById('client-tabs');
         if (tabsEl) {
           tabsEl.innerHTML = setup.clients
             .map(
               (c) =>
-                '<button type="button" role="tab" class="client-tab-btn ' +
+                '<button type="button" role="tab" id="client-tab-' +
+                escapeHtml(c.id) +
+                '" aria-selected="' +
+                (c.id === activeClientTab ? 'true' : 'false') +
+                '" aria-controls="client-tabpanel" tabindex="' +
+                (c.id === activeClientTab ? '0' : '-1') +
+                '" class="client-tab-btn ' +
                 (c.id === activeClientTab ? 'active' : '') +
                 '" data-client-id="' +
                 c.id +
@@ -1239,7 +1293,14 @@ export function renderAppleDocsHtml({
                 '</button>'
             )
             .join('');
+          if (focusSelected) {
+            const activeBtn = tabsEl.querySelector('[aria-selected="true"]');
+            if (activeBtn) activeBtn.focus();
+          }
         }
+
+        const cPanel = document.getElementById('client-tabpanel');
+        if (cPanel) cPanel.setAttribute('aria-labelledby', 'client-tab-' + activeClientTab);
 
         const active = setup.clients.find((c) => c.id === activeClientTab) || setup.clients[0];
         const fEl = document.getElementById('client-filename');
@@ -1260,9 +1321,15 @@ export function renderAppleDocsHtml({
         const c = COPY[locale];
         document.documentElement.lang = locale;
         const bEn = document.getElementById('btn-lang-en');
-        if (bEn) bEn.classList.toggle('active', locale === 'en');
+        if (bEn) {
+          bEn.classList.toggle('active', locale === 'en');
+          bEn.setAttribute('aria-pressed', locale === 'en' ? 'true' : 'false');
+        }
         const bEs = document.getElementById('btn-lang-es');
-        if (bEs) bEs.classList.toggle('active', locale === 'es');
+        if (bEs) {
+          bEs.classList.toggle('active', locale === 'es');
+          bEs.setAttribute('aria-pressed', locale === 'es' ? 'true' : 'false');
+        }
 
         const navS = document.getElementById('nav-setup');
         if (navS) navS.textContent = c.nav.setup;
@@ -1492,7 +1559,21 @@ export function renderAppleDocsHtml({
           const btn = e.target.closest('[data-prompt-id]');
           if (!btn) return;
           activePromptTab = btn.getAttribute('data-prompt-id');
-          renderPromptArea();
+          renderPromptArea(false);
+        });
+        pTabs.addEventListener('keydown', function (e) {
+          const list = COPY[locale].recruiter.promptTabs;
+          const curIdx = Math.max(0, list.findIndex((t) => t.id === activePromptTab));
+          let nextIdx = null;
+          if (e.key === 'ArrowRight') nextIdx = (curIdx + 1) % list.length;
+          else if (e.key === 'ArrowLeft') nextIdx = (curIdx - 1 + list.length) % list.length;
+          else if (e.key === 'Home') nextIdx = 0;
+          else if (e.key === 'End') nextIdx = list.length - 1;
+          if (nextIdx !== null) {
+            e.preventDefault();
+            activePromptTab = list[nextIdx].id;
+            renderPromptArea(true);
+          }
         });
       }
 
@@ -1502,7 +1583,21 @@ export function renderAppleDocsHtml({
           const btn = e.target.closest('[data-client-id]');
           if (!btn) return;
           activeClientTab = btn.getAttribute('data-client-id');
-          renderClientArea();
+          renderClientArea(false);
+        });
+        cTabs.addEventListener('keydown', function (e) {
+          const list = COPY[locale].setup.clients;
+          const curIdx = Math.max(0, list.findIndex((c) => c.id === activeClientTab));
+          let nextIdx = null;
+          if (e.key === 'ArrowRight') nextIdx = (curIdx + 1) % list.length;
+          else if (e.key === 'ArrowLeft') nextIdx = (curIdx - 1 + list.length) % list.length;
+          else if (e.key === 'Home') nextIdx = 0;
+          else if (e.key === 'End') nextIdx = list.length - 1;
+          if (nextIdx !== null) {
+            e.preventDefault();
+            activeClientTab = list[nextIdx].id;
+            renderClientArea(true);
+          }
         });
       }
 
