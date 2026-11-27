@@ -164,7 +164,7 @@ describe('santiago-jv-mcp Cloudflare Worker & Hexagonal Domain Suite', () => {
         .content[0].text
     );
     assert.equal(overviewJson.fullName, 'Santiago Olayo Villamil');
-    assert.match(overviewJson.headline, /Product Owner Engineer/);
+    assert.match(overviewJson.headline, /Full Stack Software Engineer/);
 
     // 2. get_work_experience filtered by GoodRec and ai-mcp
     const expRes = await worker.fetch(

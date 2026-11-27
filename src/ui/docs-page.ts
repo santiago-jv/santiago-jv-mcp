@@ -1081,7 +1081,7 @@ export function renderAppleDocsHtml({
         { label: 'CleverTap & Metabase Analytics', aliases: ['clevertap', 'metabase', 'analytics', 'analítica', 'kpis'] },
         { label: 'Stripe, Nequi, Refácil, Retool & FCM', aliases: ['stripe', 'nequi', 'refacil', 'refácil', 'retool', 'firebase', 'fcm', 'push notifications', 'twilio', 'sendgrid', 'intercom', 'appsflyer', 'tusdatos', 'kyc', 'webhooks'] },
         { label: 'Docker & GitHub Actions CI/CD', aliases: ['docker', 'github actions', 'ci/cd', 'cicd'] },
-        { label: 'End-to-End Product Ownership', aliases: ['product owner', 'stakeholders', 'scrum', 'agile', 'tech lead'] }
+        { label: 'End-to-End Feature Delivery & Stakeholders', aliases: ['stakeholders', 'scrum', 'agile', 'tech lead', 'end-to-end'] }
       ];
 
       const PREVIEW_GAPS = [
@@ -1147,8 +1147,8 @@ export function renderAppleDocsHtml({
         if (ym && parseInt(ym[1], 10) >= 7) {
           gaps.push(
             locale === 'es'
-              ? 'La vacante menciona ' + ym[1] + '+ años; Santiago cuenta con 4.5+ años en producción.'
-              : 'Role mentions ' + ym[1] + '+ years; Santiago brings 4.5+ years in production.'
+              ? 'La vacante menciona ' + ym[1] + '+ años; Santiago cuenta con 5+ años en producción.'
+              : 'Role mentions ' + ym[1] + '+ years; Santiago brings 5+ years in production.'
           );
         }
 

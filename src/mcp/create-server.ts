@@ -429,8 +429,8 @@ export function createSantiagoMcpServer(version = '1.0.0'): McpServer {
               atsSummaryCard: {
                 candidate: liveIdentity.fullName,
                 targetRole: `${role_title} @ ${company_name}`,
-                currentRole: 'Product Owner Engineer / Senior Backend Engineer @ GoodRec',
-                experience: '4+ años (Node.js, NestJS, TypeScript, Spring Boot, AWS, PostgreSQL, MongoDB, Redis, Datadog, MCP)',
+                currentRole: 'Semi Senior Full Stack Engineer @ GoodRec',
+                experience: '5+ años (Node.js, NestJS, TypeScript, Spring Boot, AWS, PostgreSQL, MongoDB, Redis, Datadog, MCP)',
                 location: 'Colombia (UTC-5) · Remoto / Barranquilla / Santa Marta',
                 email: liveIdentity.links.email,
                 linkedin: liveIdentity.links.linkedin,
@@ -446,8 +446,8 @@ export function createSantiagoMcpServer(version = '1.0.0'): McpServer {
               atsSummaryCard: {
                 candidate: liveIdentity.fullName,
                 targetRole: `${role_title} @ ${company_name}`,
-                currentRole: 'Product Owner Engineer / Senior Backend Engineer @ GoodRec',
-                experience: '4+ years (Node.js, NestJS, TypeScript, Spring Boot, AWS, PostgreSQL, MongoDB, Redis, Datadog, MCP)',
+                currentRole: 'Semi Senior Full Stack Engineer @ GoodRec',
+                experience: '5+ years (Node.js, NestJS, TypeScript, Spring Boot, AWS, PostgreSQL, MongoDB, Redis, Datadog, MCP)',
                 location: 'Colombia (UTC-5, EST overlap) · Remote',
                 email: liveIdentity.links.email,
                 linkedin: liveIdentity.links.linkedin,

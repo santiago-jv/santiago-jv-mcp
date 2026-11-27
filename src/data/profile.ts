@@ -42,11 +42,11 @@ export const SANTIAGO_IDENTITY = {
   fullName: 'Santiago Olayo Villamil',
   displayName: 'Santiago Olayo',
   handle: 'santiago-jv',
-  yearsOfExperience: 4.5,
-  experienceLabel: '4+ years',
+  yearsOfExperience: 5.4,
+  experienceLabel: '5+ years',
   headline: {
-    en: 'Senior Software Engineer · Backend, Cloud, Product Analytics & AI Internal Tooling (Product Owner Engineer)',
-    es: 'Senior Software Engineer · Backend, Cloud, Analítica de Producto y Tooling Interno con IA (Product Owner Engineer)',
+    en: 'Full Stack Software Engineer · Backend, Cloud, Product Analytics & AI Internal Tooling',
+    es: 'Full Stack Software Engineer · Backend, Cloud, Analítica de Producto y Tooling Interno con IA',
   },
   location: {
     city: 'Barranquilla / Santa Marta',
@@ -71,8 +71,8 @@ export const SANTIAGO_IDENTITY = {
     },
   ],
   summary: {
-    en: 'Systems Engineer and Senior Software Engineer with 4+ years of experience building and scaling products for startups and international companies. Specializes in backend engineering (Node.js, NestJS, TypeScript, Java, Spring Boot), Hexagonal Architecture & DDD, cloud infrastructure (AWS, Google Cloud Functions, Cloudflare Workers), concurrency control with Redis locks, observability (Datadog), product analytics (CleverTap, Metabase), and applied AI internal tooling (Model Context Protocol servers, team skills/plugins, and LLM workflow rules). Known for owning features end-to-end alongside product, operations, support, and finance.',
-    es: 'Ingeniero de Sistemas y Senior Software Engineer con más de 4 años de experiencia construyendo y escalando productos para startups y empresas internacionales. Especializado en desarrollo backend (Node.js, NestJS, TypeScript, Java, Spring Boot), Arquitectura Hexagonal y DDD, infraestructura cloud (AWS, Google Cloud Functions, Cloudflare Workers), control de concurrencia con locks en Redis, observabilidad (Datadog), analítica de producto (CleverTap, Metabase) y tooling interno con IA (servidores MCP, plugins/skills por equipo y reglas de prompting). Reconocido por liderar funcionalidades de punta a punta junto a producto, operaciones, soporte y finanzas.',
+    en: 'Systems Engineer and Senior Software Engineer with 5+ years of experience building and scaling products for startups and international companies. Specializes in backend engineering (Node.js, NestJS, TypeScript, Java, Spring Boot), Hexagonal Architecture & DDD, cloud infrastructure (AWS, Google Cloud Functions, Cloudflare Workers), concurrency control with Redis locks, observability (Datadog), product analytics (CleverTap, Metabase), and applied AI internal tooling (Model Context Protocol servers, team skills/plugins, and LLM workflow rules). Known for owning features end-to-end alongside product, operations, support, and finance.',
+    es: 'Ingeniero de Sistemas y Senior Software Engineer con más de 5 años de experiencia construyendo y escalando productos para startups y empresas internacionales. Especializado en desarrollo backend (Node.js, NestJS, TypeScript, Java, Spring Boot), Arquitectura Hexagonal y DDD, infraestructura cloud (AWS, Google Cloud Functions, Cloudflare Workers), control de concurrencia con locks en Redis, observabilidad (Datadog), analítica de producto (CleverTap, Metabase) y tooling interno con IA (servidores MCP, plugins/skills por equipo y reglas de prompting). Reconocido por liderar funcionalidades de punta a punta junto a producto, operaciones, soporte y finanzas.',
   },
   education: [
     {
@@ -114,8 +114,8 @@ export const WORK_EXPERIENCE: WorkExperienceEntry[] = [
     id: 'goodrec',
     company: 'GoodRec',
     role: {
-      en: 'Product Owner Engineer / Senior Backend & Fullstack Engineer',
-      es: 'Product Owner Engineer / Senior Backend & Fullstack Engineer',
+      en: 'Semi Senior Full Stack Engineer / Backend Engineer',
+      es: 'Semi Senior Full Stack Engineer / Backend Engineer',
     },
     period: {
       en: 'Jan 2025 – Present',
@@ -241,8 +241,8 @@ export const SKILL_MATRIX: SkillEntry[] = [
     years: 4.5,
     aliases: ['node.js', 'nodejs', 'node js', 'node'],
     evidence: {
-      en: '4+ years building high-concurrency APIs, fintech wallets, background workers, and microservices.',
-      es: '4+ años construyendo APIs de alta concurrencia, billeteras digitales, workers asíncronos y microservicios.',
+      en: '5+ years building high-concurrency APIs, fintech wallets, background workers, and microservices.',
+      es: '5+ años construyendo APIs de alta concurrencia, billeteras digitales, workers asíncronos y microservicios.',
     },
   },
   {
@@ -521,13 +521,11 @@ export const SKILL_MATRIX: SkillEntry[] = [
   },
   {
     id: 'product-ownership',
-    name: 'End-to-End Product Ownership & Stakeholder Alignment',
+    name: 'End-to-End Feature Delivery & Stakeholder Alignment',
     category: 'product-analytics',
     tier: 'core',
     years: 3,
     aliases: [
-      'product owner',
-      'product engineer',
       'stakeholders',
       'end-to-end',
       'end to end',
@@ -535,7 +533,7 @@ export const SKILL_MATRIX: SkillEntry[] = [
       'agile',
       'tech lead',
       'technical design',
-      'feature ownership',
+      'feature delivery',
     ],
     evidence: {
       en: 'Partnering directly with Product, Ops, Support, and Finance from problem scoping to post-release metrics.',

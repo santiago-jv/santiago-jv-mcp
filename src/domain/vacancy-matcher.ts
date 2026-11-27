@@ -160,8 +160,6 @@ export function evaluateVacancyMatch(input: VacancyEvaluationInput): VacancyEval
     'full-stack',
     'full stack',
     'software engineer',
-    'product engineer',
-    'product owner engineer',
     'tech lead',
     'líder técnico',
     'ingeniero de software',
@@ -208,15 +206,15 @@ export function evaluateVacancyMatch(input: VacancyEvaluationInput): VacancyEval
       seniorityScore = 82;
       gapNotes.push(
         lang === 'es'
-          ? `La vacante menciona ${requiredYears}+ años; Santiago cuenta con 4.5+ años de experiencia productiva intensiva asumiendo ownership Senior/Product Owner Engineer.`
-          : `The role mentions ${requiredYears}+ years; Santiago brings 4.5+ years of high-ownership production experience operating at Senior / Product Owner Engineer scope.`
+          ? `La vacante menciona ${requiredYears}+ años; Santiago cuenta con 5+ años de experiencia productiva intensiva en entregas Full Stack y Backend de punta a punta.`
+          : `The role mentions ${requiredYears}+ years; Santiago brings 5+ years of high-ownership production experience across Full Stack and Backend delivery.`
       );
     } else if (requiredYears >= 7) {
       seniorityScore = 66;
       gapNotes.push(
         lang === 'es'
-          ? `La vacante pide ${requiredYears}+ años de experiencia; Santiago tiene 4+ años en producción, por lo que si el filtro de años es estricto debe considerarse.`
-          : `The vacancy asks for ${requiredYears}+ years of experience; Santiago has 4+ years in production, which should be noted if tenure is a strict HR gate.`
+          ? `La vacante pide ${requiredYears}+ años de experiencia; Santiago tiene 5+ años en producción, por lo que si el filtro de años es estricto debe considerarse.`
+          : `The vacancy asks for ${requiredYears}+ years of experience; Santiago has 5+ years in production, which should be noted if tenure is a strict HR gate.`
       );
     }
   }
@@ -295,13 +293,13 @@ export function evaluateVacancyMatch(input: VacancyEvaluationInput): VacancyEval
     lang === 'es'
       ? [
           'Experiencia real en producción construyendo tooling con MCP (Model Context Protocol) y servicios serverless en el edge con Cloudflare Workers.',
-          'Mentalidad de Product Owner Engineer: trabaja directo con Producto, Operaciones, Soporte y Finanzas de punta a punta.',
+          'Enfoque end-to-end orientado a negocio: trabaja directo con Producto, Operaciones, Soporte y Finanzas de punta a punta.',
           'Dominio de observabilidad y datos de negocio: Datadog (APM, trazas, alertas), CleverTap (eventos) y Metabase (SQL/BI).',
           'Sólida base en sistemas de alta concurrencia: Arquitectura Hexagonal, DDD, locks atómicos en Redis y migraciones sin caída.',
         ]
       : [
           'Hands-on production experience building MCP (Model Context Protocol) tooling and stateless edge services on Cloudflare Workers.',
-          'Product Owner Engineer mindset: partners directly with Product, Ops, Support, and Finance from discovery to post-release impact.',
+          'End-to-end business mindset: partners directly with Product, Ops, Support, and Finance from discovery to post-release impact.',
           'Full-loop observability & product analytics: Datadog (APM, tracing, SLA alerts), CleverTap (funnels), and Metabase (SQL BI).',
           'Battle-tested concurrency & architecture: Hexagonal Architecture, DDD, atomic Redis distributed locks, and zero-downtime DB migrations.',
         ];
@@ -325,7 +323,7 @@ export function evaluateVacancyMatch(input: VacancyEvaluationInput): VacancyEval
         : `Santiago presenta un ${overallScore}% de compatibilidad con ${roleLabel}. Aunque cuenta con bases fuertes en arquitectura backend (Node.js/NestJS/TypeScript, AWS, PostgreSQL/MongoDB, Redis), existen diferencias frente al stack o modalidad principal solicitada que vale la pena revisar.`
       : overallScore >= 70
         ? `Santiago scores a ${overallScore}% match for ${roleLabel}. He aligns directly across ${
-            topMatchedNames.length > 0 ? topMatchedNames.join(', ') : 'backend architecture, cloud delivery, and end-to-end product ownership'
+            topMatchedNames.length > 0 ? topMatchedNames.join(', ') : 'backend architecture, cloud delivery, and end-to-end feature execution'
           }, while bringing rare force-multipliers in production MCP tooling, Cloudflare Workers, Datadog APM, and CleverTap/Metabase analytics.`
         : `Santiago scores a ${overallScore}% match for ${roleLabel}. While he brings strong backend engineering fundamentals (Node.js/NestJS/TypeScript, AWS, PostgreSQL/MongoDB, Redis), there are stack or modality differences relative to the primary requirements.`;
 

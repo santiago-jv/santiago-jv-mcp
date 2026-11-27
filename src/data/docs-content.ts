@@ -300,12 +300,12 @@ Job Description:
           {
             label: 'Senior Backend (NestJS / AWS)',
             role: 'Senior Backend Engineer',
-            jd: 'Senior Backend Engineer with 4+ years in TypeScript, Node.js, NestJS, Hexagonal Architecture, DDD, PostgreSQL, MongoDB, Redis locks, Stripe, AWS ECS, GitHub Actions, and Datadog. Remote.',
+            jd: 'Senior Backend Engineer with 5+ years in TypeScript, Node.js, NestJS, Hexagonal Architecture, DDD, PostgreSQL, MongoDB, Redis locks, Stripe, AWS ECS, GitHub Actions, and Datadog. Remote.',
           },
           {
             label: 'AI & Internal Tools',
             role: 'Applied AI & Platform Engineer',
-            jd: 'Fullstack / Backend Engineer building internal AI workflows, Model Context Protocol (MCP) servers, Cloudflare Workers, and analytics in Metabase & CleverTap. 4+ years, Remote.',
+            jd: 'Fullstack / Backend Engineer building internal AI workflows, Model Context Protocol (MCP) servers, Cloudflare Workers, and analytics in Metabase & CleverTap. 5+ years, Remote.',
           },
           {
             label: 'Different Stack (Rust / K8s)',
@@ -347,7 +347,7 @@ Job Description:
           name: 'get_profile_overview',
           badge: 'Overview',
           summary:
-            'Executive summary, 4.5+ years experience overview, location (UTC-5), languages, and resume PDF URLs.',
+            'Executive summary, 5+ years experience overview, location (UTC-5), languages, and resume PDF URLs.',
           params: [
             { name: 'language', type: '"en" | "es"', required: false, description: 'Response language.' },
           ],
@@ -610,12 +610,12 @@ Vacante:
           {
             label: 'Senior Backend (NestJS / AWS)',
             role: 'Senior Backend Engineer',
-            jd: 'Senior Backend Engineer con 4+ años en TypeScript, Node.js, NestJS, Arquitectura Hexagonal, DDD, PostgreSQL, MongoDB, locks en Redis, Stripe, AWS ECS, GitHub Actions y Datadog. Remoto.',
+            jd: 'Senior Backend Engineer con 5+ años en TypeScript, Node.js, NestJS, Arquitectura Hexagonal, DDD, PostgreSQL, MongoDB, locks en Redis, Stripe, AWS ECS, GitHub Actions y Datadog. Remoto.',
           },
           {
             label: 'IA & Internal Tools',
-            role: 'Product Owner / AI Tooling Engineer',
-            jd: 'Ingeniero Fullstack/Backend para automatización con IA, servidores Model Context Protocol (MCP), Cloudflare Workers y analítica con CleverTap y Metabase. 4+ años, Remoto.',
+            role: 'Full Stack / AI Tooling Engineer',
+            jd: 'Ingeniero Fullstack/Backend para automatización con IA, servidores Model Context Protocol (MCP), Cloudflare Workers y analítica con CleverTap y Metabase. 5+ años, Remoto.',
           },
           {
             label: 'Otro Stack (Rust / K8s)',
@@ -657,7 +657,7 @@ Vacante:
           name: 'get_profile_overview',
           badge: 'Perfil',
           summary:
-            'Resumen profesional, 4.5+ años de experiencia, ubicación (UTC-5), idiomas y enlaces al CV en PDF.',
+            'Resumen profesional, 5+ años de experiencia, ubicación (UTC-5), idiomas y enlaces al CV en PDF.',
           params: [
             { name: 'language', type: '"en" | "es"', required: false, description: 'Idioma de respuesta.' },
           ],
